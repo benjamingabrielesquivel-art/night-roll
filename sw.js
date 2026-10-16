@@ -1,5 +1,5 @@
 // Night Roll: keeps the page usable offline during the walk.
-const CACHE = "night-roll-v5";
+const CACHE = "night-roll-v6";
 const SHELL = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
