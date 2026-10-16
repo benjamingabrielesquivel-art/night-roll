@@ -146,6 +146,15 @@ button,input,textarea{font:inherit;color:inherit}
 .rules li::before{content:"";width:.7rem;height:.7rem;background:var(--yellow);border:1.5px solid var(--ink);translate:0 .1rem}
 .rules li:nth-child(3n+2)::before{background:var(--pink)}
 .rules li:nth-child(3n)::before{background:var(--blue)}
+.roll-pick{display:grid;gap:.5rem;margin-top:clamp(20px,3.4vw,30px)}
+.roll-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));gap:12px}
+.roll-opt{display:grid;gap:.3rem;min-width:0;text-align:left;cursor:pointer;padding:.8rem 1rem;border:2px solid var(--ink);background:var(--sheet);color:var(--ink);
+  transition:transform .12s ease,box-shadow .12s ease}
+.roll-opt:hover{background:color-mix(in srgb,var(--yellow) 30%,var(--sheet))}
+.roll-opt[aria-checked="true"]{background:var(--ink);color:var(--on-ink);box-shadow:4px 4px 0 var(--pink);transform:translate(-2px,-2px)}
+.roll-opt[data-roll="extrovert"][aria-checked="true"]{box-shadow:4px 4px 0 var(--yellow)}
+.roll-name{font-family:var(--f-display);font-size:clamp(1.05rem,4vw,1.3rem);line-height:1}
+.roll-sub{font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.02em}
 .start-row{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-top:clamp(18px,3vw,26px)}
 
 /* buttons */
@@ -394,6 +403,14 @@ button,input,textarea{font:inherit;color:inherit}
     </div>
   </section>
 
+  <div class="roll-pick">
+    <span class="label" id="roll-label">Which roll tonight?</span>
+    <div class="roll-opts" role="radiogroup" aria-labelledby="roll-label">
+      <button class="roll-opt" type="button" role="radio" data-roll="original" aria-checked="true"><span class="roll-name">The original</span><span class="roll-sub">Feelings and questions, a stranger twice</span></button>
+      <button class="roll-opt" type="button" role="radio" data-roll="extrovert" aria-checked="false"><span class="roll-name">The extrovert</span><span class="roll-sub">Same night, eight frames out loud with strangers</span></button>
+    </div>
+  </div>
+
   <div class="start-row">
     <button class="btn btn-big btn-ink" type="button" id="start">Load the camera</button>
     <span class="label" id="resume-line"></span>
@@ -501,7 +518,7 @@ button,input,textarea{font:inherit;color:inherit}
   "use strict";
 
   // Each frame: a feeling to interpret with the camera, then a question to ask each other.
-  const FRAMES = [
+  const FRAMES_A = [
     { t: "Opening credits", ink: "light", s: [
       ["shoot", "Let's shoot something on this table that feels like the start of something."],
       ["ask", "If tonight were a film, what genre is it so far?"]] },
@@ -567,13 +584,13 @@ button,input,textarea{font:inherit;color:inherit}
       ["ask", "What is a door you walked through that you can't walk back through?"]] },
     { t: "Unromantic proof", ink: "tender", s: [
       ["shoot", "Let's shoot something that looks like care without trying to."],
-      ["ask", "What is the least romantic way anyone has ever shown they loved you?"]] },
+      ["ask", "What is the least romantic way someone could show they care about you, or want you, that would still work on you?"]] },
     { t: "Still waiting", ink: "deep", s: [
       ["shoot", "Let's shoot something that is waiting for someone."],
       ["ask", "What are you quietly hoping for in the next year?"]] },
     { t: "Not in the chat", ink: "tender", s: [
       ["shoot", "Let's shoot something that feels like a secret."],
-      ["ask", "Two months and thousands of messages: what is one true thing that somehow never came up?"]] },
+      ["ask", "What is one true thing that has never come up?"]] },
     { t: "A heart that isn't trying", ink: "tender", s: [
       ["shoot", "Let's shoot something that looks like love by accident."],
       ["ask", "What is the most underrated way to tell someone you like them?"]] },
@@ -609,9 +626,43 @@ button,input,textarea{font:inherit;color:inherit}
   ];
   const INK_NAME = { light: "Light", tender: "Tender", deep: "Deep" };
   const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask each other", then: "P.S.", tip: "Camera tip" };
-  const N = FRAMES.length;
+  // The extrovert roll: the same night, with eight frames swapped for louder ones.
+  const LOUD = {
+    4: { t: "Named after us", ink: "light", s: [
+      ["shoot", "We ask the bartender to make a drink they would name after us, and we shoot it before the first sip."],
+      ["ask", "If we were a cocktail, what would be in it?"]] },
+    6: { t: "Cheers, strangers", ink: "tender", s: [
+      ["shoot", "We raise a glass to the table next to us and shoot the toast."],
+      ["ask", "What from this week deserves a toast?"]] },
+    11: { t: "Ground level", ink: "light", s: [
+      ["shoot", "We lie down on the pavement side by side and ask a stranger to shoot us from above, however they like."],
+      ["ask", "What would you do more often if nobody was watching?"],
+      ["tip", "We switch the flash on and wait for its ready light before we hand over the camera."]] },
+    13: { t: "Photobomb, with permission", ink: "light", s: [
+      ["shoot", "We ask a group of strangers if we can jump into their photo. Then we ask them to jump into ours."],
+      ["ask", "Which friend group would you have joined in another life?"]] },
+    17: { t: "Advice from a stranger", ink: "tender", s: [
+      ["shoot", "We ask a stranger for one piece of advice for the two of us, and shoot them while they give it."],
+      ["ask", "What is the best advice you ever ignored?"]] },
+    18: { t: "Ten seconds of fame", ink: "light", s: [
+      ["shoot", "One of us performs something for ten seconds, right here on the street. The other one shoots the audience."],
+      ["ask", "What talent do you have that nobody ever asks about?"]] },
+    21: { t: "No music", ink: "tender", s: [
+      ["shoot", "We slow dance under a streetlight with no music, and ask a stranger to shoot it."],
+      ["ask", "If tonight had a soundtrack, which song would be playing right now?"]] },
+    25: { t: "A stranger's favourite", ink: "deep", s: [
+      ["shoot", "We hand a stranger the camera and ask them to shoot their favourite thing on this street, then tell us why."],
+      ["ask", "What is something a stranger once said to you that stuck?"]] }
+  };
+  const ROLLS = {
+    original: { name: "The original", frames: FRAMES_A },
+    extrovert: { name: "The extrovert", frames: FRAMES_A.map((f, i) => LOUD[i + 1] || f) }
+  };
+  const N = FRAMES_A.length;
   const LS = "night-roll:v2";
   const LS_THEME = "night-roll:theme";
+  const LS_ROLL = "night-roll:roll";
+  const keyFor = r => r === "original" ? LS : LS + ":" + r;
 
   const ICON_MOON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg>';
   const ICON_SUN = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2.3" stroke-linecap="square"/></svg>';
@@ -629,30 +680,47 @@ button,input,textarea{font:inherit;color:inherit}
 
   /* ---------- state (this device only) ---------- */
 
-  let st = { cur: 1, view: "frame", started: false, frames: {} };
+  let roll = "original";
   try {
-    const raw = JSON.parse(localStorage.getItem(LS) || "null");
-    if (raw && typeof raw === "object") {
-      if (Number.isInteger(raw.cur) && raw.cur >= 1 && raw.cur <= N) st.cur = raw.cur;
-      if (["frame", "sheet", "end"].includes(raw.view)) st.view = raw.view;
-      st.started = raw.started === true;
-      if (raw.frames && typeof raw.frames === "object") {
-        for (let i = 1; i <= N; i++) {
-          const f = raw.frames[i];
-          if (!f) continue;
-          st.frames[i] = {
-            shot: f.shot === true,
-            note: typeof f.note === "string" ? f.note.slice(0, 300) : "",
-            spare: Number.isInteger(f.spare) && f.spare >= 0 && f.spare < SPARES.length ? f.spare : null
-          };
+    const q = new URLSearchParams(location.search).get("roll");
+    const saved = localStorage.getItem(LS_ROLL);
+    if (ROLLS[q]) roll = q; else if (ROLLS[saved]) roll = saved;
+  } catch {}
+  let FRAMES = ROLLS[roll].frames;
+
+  function loadState(r) {
+    const out = { cur: 1, view: "frame", started: false, frames: {} };
+    try {
+      const raw = JSON.parse(localStorage.getItem(keyFor(r)) || "null");
+      if (raw && typeof raw === "object") {
+        if (Number.isInteger(raw.cur) && raw.cur >= 1 && raw.cur <= N) out.cur = raw.cur;
+        if (["frame", "sheet", "end"].includes(raw.view)) out.view = raw.view;
+        out.started = raw.started === true;
+        if (raw.frames && typeof raw.frames === "object") {
+          for (let i = 1; i <= N; i++) {
+            const f = raw.frames[i];
+            if (!f) continue;
+            out.frames[i] = {
+              shot: f.shot === true,
+              note: typeof f.note === "string" ? f.note.slice(0, 300) : "",
+              spare: Number.isInteger(f.spare) && f.spare >= 0 && f.spare < SPARES.length ? f.spare : null
+            };
+          }
         }
       }
-    }
-  } catch {}
+    } catch {}
+    return out;
+  }
+  let st = loadState(roll);
+  const mem = {};  // each roll kept in memory too, in case storage is blocked
   let saveTimer = null;
   function save() {
     clearTimeout(saveTimer);
-    saveTimer = setTimeout(() => { try { localStorage.setItem(LS, JSON.stringify(st)); } catch {} }, 150);
+    saveTimer = setTimeout(flush, 150);
+  }
+  function flush() {
+    clearTimeout(saveTimer);
+    try { localStorage.setItem(keyFor(roll), JSON.stringify(st)); } catch {}
   }
   const fr = n => st.frames[n] || { shot: false, note: "", spare: null };
   const edit = n => (st.frames[n] = st.frames[n] || { shot: false, note: "", spare: null });
@@ -723,7 +791,7 @@ button,input,textarea{font:inherit;color:inherit}
     const panel = $("#frame-panel");
     panel.dataset.ink = f.ink;
     panel.classList.toggle("is-shot", s.shot);
-    $("#f-num").textContent = `Frame ${pad(n)} / ${N}`;
+    $("#f-num").textContent = `Frame ${pad(n)} / ${N} · ${ROLLS[roll].name}`;
     $("#f-part").textContent = `${part.name} · ${part.sub}`;
     $("#f-roman").textContent = roman(n) + ".";
     $("#f-title").textContent = f.t;
@@ -821,6 +889,7 @@ button,input,textarea{font:inherit;color:inherit}
 
   function render(animate) {
     const v = st.view;
+    document.querySelectorAll(".roll-opt").forEach(b => b.setAttribute("aria-checked", String(b.dataset.roll === roll)));
     $("#tab-frame").setAttribute("aria-selected", String(v === "frame"));
     $("#tab-sheet").setAttribute("aria-selected", String(v === "sheet"));
     $("#tab-frame").tabIndex = v === "sheet" ? -1 : 0;
@@ -917,7 +986,7 @@ button,input,textarea{font:inherit;color:inherit}
   $("#end-date").textContent = dateStr;
 
   function notesText() {
-    const lines = [`Night Roll · ${dateStr}`, ""];
+    const lines = [`Night Roll · ${ROLLS[roll].name} · ${dateStr}`, ""];
     FRAMES.forEach((f, i) => {
       const s = fr(i + 1);
       const title = s.spare != null ? `${SPARES[s.spare][0]} (spare for ${f.t})` : f.t;
@@ -969,6 +1038,25 @@ button,input,textarea{font:inherit;color:inherit}
     if (e.key === "ArrowRight") { e.preventDefault(); go(st.cur + 1); }
     if (e.key === "ArrowLeft" && st.cur > 1) { e.preventDefault(); go(st.cur - 1); }
   });
+
+  function setRoll(r) {
+    if (!ROLLS[r] || r === roll) return;
+    flush();
+    mem[roll] = st;
+    roll = r;
+    FRAMES = ROLLS[r].frames;
+    st = mem[r] || loadState(r);
+    try { localStorage.setItem(LS_ROLL, r); } catch {}
+    try {
+      const u = new URL(location.href);
+      if (r === "original") u.searchParams.delete("roll"); else u.searchParams.set("roll", r);
+      history.replaceState(null, "", u);
+    } catch {}
+    $("#copy-box").hidden = true;
+    render(true);
+    toast(`${ROLLS[r].name} loaded. Each roll keeps its own ticks and notes.`);
+  }
+  document.querySelectorAll(".roll-opt").forEach(b => b.addEventListener("click", () => setRoll(b.dataset.roll)));
 
   addEventListener("resize", syncScrollMargin);
   paintLights();
