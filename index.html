@@ -41,6 +41,7 @@
   --speck-filter:none;
   --acc:var(--pink);
   --soap:#F45BAA; --soap-hi:#FFC2E1; --soap-lo:#B8256F; --soap-edge:#C8347F; --soap-shade:rgba(25,24,29,.28);
+  --skin:#F2B48E; --skin-hi:#F9CFB2; --nail:#F8DACB; --line:#19181D;  /* the fist and soap are an object: same colours in both themes */
 
   --f-display:"Dela Gothic One","Arial Black",Impact,sans-serif;
   --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
@@ -138,18 +139,24 @@ button,input,textarea{font:inherit;color:inherit}
 .env-input:focus-visible{outline:3px solid var(--on-acc);outline-offset:2px}
 .env-pair{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
 .env-foot{margin:1rem 0 0;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.03em}
-.rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px)}
-.rules::before{content:"";position:absolute;top:-13px;left:78%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
+.rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);margin-top:70px}
+.rules::before{display:none;content:"";position:absolute;top:-13px;left:78%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
-.rules .soap{position:relative;display:inline-block;margin:-46px 0 1rem -6px;padding:.6rem 1.15rem .7rem;border-radius:26px/30px;text-shadow:none;
-  background:radial-gradient(120% 95% at 28% 18%,var(--soap-hi) 0%,var(--soap) 42%,var(--soap) 64%,var(--soap-lo) 118%);
-  box-shadow:inset 0 3px 7px rgba(255,255,255,.55),inset 0 -7px 12px rgba(110,0,55,.32),0 9px 0 -1px var(--soap-edge),0 15px 20px var(--soap-shade);
-  transform:rotate(-7deg)}
-.soap::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image:var(--grain);background-size:180px;mix-blend-mode:soft-light;opacity:.35}
-.soap-text{display:grid;font-family:var(--f-body);font-weight:900;font-stretch:72%;text-transform:uppercase;line-height:.84;font-size:clamp(2.1rem,9.4vw,2.9rem);letter-spacing:-.01em;
-  color:var(--soap);transform:skewX(-13deg);
-  text-shadow:-1px -1px 0 var(--soap-hi),-2px -2px 2px rgba(255,255,255,.5),1px 1px 0 var(--soap-lo),2px 3px 3px rgba(110,0,55,.5)}
-.soap-text span:first-child{margin-left:.55em}
+.rules .rules-title{margin:-104px 0 .2rem -6px;line-height:0;text-shadow:none}
+.fist{display:block;width:min(100%,300px);height:auto;overflow:hidden;-webkit-mask-image:linear-gradient(#000 74%,transparent 98%);mask-image:linear-gradient(#000 74%,transparent 98%)}
+.fist .ln{stroke:var(--line);stroke-width:4;stroke-linejoin:round;stroke-linecap:round}
+.fist .skin{fill:var(--skin)}
+.fist .skin-hi{fill:var(--skin-hi)}
+.fist .nail{fill:var(--nail)}
+.fist .crease{fill:none;stroke:var(--line);stroke-width:2.5;stroke-linecap:round;opacity:.7}
+.fist .plate{fill:var(--pink);mix-blend-mode:var(--plate-blend);opacity:.55}
+.fist .edge{fill:var(--soap-edge)}
+.fist .shine{fill:#fff;opacity:.28}
+.fist .word{font-family:var(--f-body);font-weight:900;font-stretch:72%;font-size:66px;letter-spacing:-1px;text-anchor:middle}
+.fist .w-hi{fill:var(--soap-hi)}
+.fist .w-lo{fill:var(--soap-lo)}
+.fist .w{fill:var(--soap)}
+.rules ul li strong{font-weight:800}
 .rules h2{margin:0 0 .7rem;font-family:var(--f-display);font-weight:400;font-size:clamp(1.3rem,4.6vw,1.75rem);line-height:1;text-shadow:.05em .045em 0 var(--blue)}
 .rules ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 .rules li{display:grid;grid-template-columns:.8rem minmax(0,1fr);gap:.6rem;align-items:baseline}
@@ -299,6 +306,7 @@ button,input,textarea{font:inherit;color:inherit}
 .end-stats .label{color:var(--ink)}
 .end-body{display:grid;gap:.8rem;margin-top:1rem;max-width:40rem;font-size:var(--t-lg)}
 .end-body p{margin:0}
+.besitos{font-family:var(--f-type);font-size:clamp(1.6rem,6.4vw,2.4rem);line-height:1.2}
 .copy-box{margin-top:.8rem}
 .copy-box textarea{font-family:var(--f-type);font-size:var(--t-sm)}
 
@@ -401,16 +409,55 @@ button,input,textarea{font:inherit;color:inherit}
     </div>
 
     <div class="rules">
-      <h2 class="soap"><span class="soap-text"><span>House</span><span>rules</span></span></h2>
+      <h2 class="rules-title">
+        <svg class="fist" viewBox="0 0 400 370" role="img" aria-labelledby="fist-t">
+          <title id="fist-t">House rules</title>
+          <defs>
+            <radialGradient id="soapG" cx=".3" cy=".22" r=".95">
+              <stop offset="0" stop-color="var(--soap-hi)"/>
+              <stop offset=".42" stop-color="var(--soap)"/>
+              <stop offset=".72" stop-color="var(--soap)"/>
+              <stop offset="1" stop-color="var(--soap-lo)"/>
+            </radialGradient>
+          </defs>
+          <g transform="rotate(-9 200 200)">
+            <!-- forearm and the back of the hand, behind the soap -->
+            <path class="plate" d="M150 262 C140 318 124 352 112 400 L290 400 C300 352 316 314 350 266 Z"/>
+            <path class="skin ln" d="M140 256 C130 314 116 350 104 400 L282 400 C292 350 308 312 344 262 Z"/>
+            <path class="skin ln" d="M64 128 C64 82 104 56 160 52 C222 48 286 56 306 88 L312 132 L64 132 Z"/>
+            <!-- the soap -->
+            <rect class="edge" x="44" y="118" width="320" height="176" rx="50"/>
+            <rect x="40" y="106" width="320" height="176" rx="50" fill="url(#soapG)" stroke="var(--line)" stroke-width="3.5"/>
+            <ellipse class="shine" cx="118" cy="146" rx="62" ry="14" transform="rotate(-6 118 146)"/>
+            <g transform="translate(228 214) skewX(-12)">
+              <text class="word w-hi" x="-2" y="-2">HOUSE</text>
+              <text class="word w-lo" x="2.5" y="3">HOUSE</text>
+              <text class="word w" x="0" y="0">HOUSE</text>
+            </g>
+            <g transform="translate(184 266) skewX(-12)">
+              <text class="word w-hi" x="-2" y="-2">RULES</text>
+              <text class="word w-lo" x="2.5" y="3">RULES</text>
+              <text class="word w" x="0" y="0">RULES</text>
+            </g>
+            <!-- thumb up the right side -->
+            <path class="skin ln" d="M326 268 C342 244 350 208 350 180 C350 160 360 146 376 148 C394 150 400 168 398 188 C395 226 380 262 360 290 Z"/>
+            <ellipse class="nail ln" cx="382" cy="172" rx="10" ry="15" transform="rotate(8 382 172)" style="stroke-width:2.5"/>
+            <!-- fingers curled over the top, nails toward us -->
+            <rect class="skin ln" x="76" y="84" width="48" height="64" rx="23"/>
+            <rect class="skin ln" x="124" y="70" width="56" height="86" rx="27"/>
+            <rect class="skin ln" x="180" y="64" width="58" height="94" rx="28"/>
+            <rect class="skin ln" x="238" y="70" width="56" height="88" rx="27"/>
+            <path class="crease" d="M86 108 q14 6 28 0 M136 98 q16 7 32 0 M192 94 q17 7 34 0 M250 98 q16 7 32 0"/>
+            <rect class="nail ln" x="88" y="122" width="24" height="18" rx="8" style="stroke-width:2.5"/>
+            <rect class="nail ln" x="138" y="130" width="28" height="19" rx="9" style="stroke-width:2.5"/>
+            <rect class="nail ln" x="195" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
+            <rect class="nail ln" x="252" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
+          </g>
+        </svg>
+      </h2>
       <ul>
         <li><span>The first rule of house rules is: there are no house rules.</span></li>
         <li><span>The second rule of house rules is: we <strong>do not</strong> speak about the house rules.</span></li>
-        <li><span>Third rule: we do not peek at the photos.</span></li>
-        <li><span>Fourth rule: if someone says skip, the frame is over. Or we deal a spare.</span></li>
-        <li><span>Fifth rule: one shot per frame. No retakes, and one line in the note.</span></li>
-        <li><span>Sixth rule: flash on for anything within three steps, and we wait for its ready light. Far-off signs and windows: flash off, hold very still.</span></li>
-        <li><span>Seventh rule: the night goes on as long as it has to. We wind the wheel until it stops, every time.</span></li>
-        <li><span>And the eighth and final rule: if this is our first roll together, we have to shoot.</span></li>
       </ul>
     </div>
   </section>
@@ -419,7 +466,7 @@ button,input,textarea{font:inherit;color:inherit}
     <span class="label" id="roll-label">Which roll tonight?</span>
     <div class="roll-opts" role="radiogroup" aria-labelledby="roll-label">
       <button class="roll-opt" type="button" role="radio" data-roll="original" aria-checked="true"><span class="roll-name">The original</span><span class="roll-sub">Feelings and questions, a stranger twice</span></button>
-      <button class="roll-opt" type="button" role="radio" data-roll="extrovert" aria-checked="false"><span class="roll-name">The extrovert</span><span class="roll-sub">Same night, eight frames out loud with strangers</span></button>
+      <button class="roll-opt" type="button" role="radio" data-roll="extrovert" aria-checked="false"><span class="roll-name">The extrovert</span><span class="roll-sub">Same night, seven frames out loud with strangers</span></button>
     </div>
   </div>
 
@@ -496,8 +543,7 @@ button,input,textarea{font:inherit;color:inherit}
       <h2 class="ransom" id="ransom" aria-label="That's the roll"></h2>
       <div class="end-stats" id="end-stats"></div>
       <div class="end-body">
-        <p>We drop the camera at a photo lab and keep the envelope shut. When the prints come back, we open them together.</p>
-        <p>That goes on the list. Then we sleep before five, as promised.</p>
+        <p class="besitos">besitos en el poto</p>
       </div>
       <div class="f-acts">
         <button class="btn btn-acc" type="button" id="copy">Copy our notes</button>
@@ -533,7 +579,8 @@ button,input,textarea{font:inherit;color:inherit}
   const FRAMES_A = [
     { t: "Opening credits", ink: "light", s: [
       ["shoot", "Let's shoot something on this table that feels like the start of something."],
-      ["ask", "If tonight were a film, what genre is it so far?"]] },
+      ["ask", "If tonight were a film, what genre is it so far?"],
+      ["tip", "For the whole night: flash on for anything within three steps, and we wait for its ready light. Far-off lit signs and windows: flash off, hold very still."]] },
     { t: "Small happiness", ink: "tender", s: [
       ["shoot", "Let's shoot something within reach that evokes happiness in us."],
       ["ask", "What is the smallest thing that reliably makes a day better?"]] },
@@ -556,10 +603,9 @@ button,input,textarea{font:inherit;color:inherit}
     { t: "Directed by a stranger: take two", ink: "light", s: [
       ["shoot", "Same stranger or a new one. Now the other one of us, same rules."],
       ["ask", "Who got the better director?"]] },
-    { t: "Straight onto the list", ink: "tender", s: [
-      ["shoot", "Let's shoot something that deserves a place on our list."],
-      ["ask", "Which part of the list does it go on: films, dishes, or things to do together?"],
-      ["then", "If it's empanadas, it's already on there three times."]] },
+    { t: "The question nobody asks", ink: "tender", s: [
+      ["shoot", "Let's shoot something here that looks like it has a story nobody ever asked about."],
+      ["ask", "What is a question you wish people asked you more often?"]] },
 
     { t: "Gone by morning", ink: "deep", s: [
       ["shoot", "Let's shoot something that won't be here tomorrow."],
@@ -638,11 +684,11 @@ button,input,textarea{font:inherit;color:inherit}
   ];
   const INK_NAME = { light: "Light", tender: "Tender", deep: "Deep" };
   const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask each other", then: "P.S.", tip: "Camera tip" };
-  // The extrovert roll: the same night, with eight frames swapped for louder ones.
+  // The extrovert roll: the same night, with seven frames swapped for louder ones.
   const LOUD = {
-    4: { t: "Named after us", ink: "light", s: [
-      ["shoot", "We ask the bartender to make a drink they would name after us, and we shoot it before the first sip."],
-      ["ask", "If we were a cocktail, what would be in it?"]] },
+    4: { t: "Guess how long", ink: "light", s: [
+      ["shoot", "We ask someone nearby to guess how long we've known each other, and shoot their face when they hear the answer."],
+      ["ask", "What was your first guess about me, and how wrong was it?"]] },
     6: { t: "Cheers, strangers", ink: "tender", s: [
       ["shoot", "We raise a glass to the table next to us and shoot the toast."],
       ["ask", "What from this week deserves a toast?"]] },
@@ -650,21 +696,20 @@ button,input,textarea{font:inherit;color:inherit}
       ["shoot", "We lie down on the pavement side by side and ask a stranger to shoot us from above, however they like."],
       ["ask", "What would you do more often if nobody was watching?"],
       ["tip", "We switch the flash on and wait for its ready light before we hand over the camera."]] },
-    13: { t: "Photobomb, with permission", ink: "light", s: [
-      ["shoot", "We ask a group of strangers if we can jump into their photo. Then we ask them to jump into ours."],
-      ["ask", "Which friend group would you have joined in another life?"]] },
+    13: { t: "A souvenir from us", ink: "light", s: [
+      ["shoot", "We give a stranger a printed photo of one of us to keep, and shoot them holding it like a precious family portrait."],
+      ["ask", "If a stranger kept one photo of you forever, which one should it be?"],
+      ["tip", "We bring a small print from home."]] },
     17: { t: "Advice from a stranger", ink: "tender", s: [
       ["shoot", "We ask a stranger for one piece of advice for the two of us, and shoot them while they give it."],
       ["ask", "What is the best advice you ever ignored?"]] },
     18: { t: "Ten seconds of fame", ink: "light", s: [
       ["shoot", "One of us performs something for ten seconds, right here on the street. The other one shoots the audience."],
       ["ask", "What talent do you have that nobody ever asks about?"]] },
-    21: { t: "No music", ink: "tender", s: [
-      ["shoot", "We slow dance under a streetlight with no music, and ask a stranger to shoot it."],
-      ["ask", "If tonight had a soundtrack, which song would be playing right now?"]] },
-    25: { t: "A stranger's favourite", ink: "deep", s: [
-      ["shoot", "We hand a stranger the camera and ask them to shoot their favourite thing on this street, then tell us why."],
-      ["ask", "What is something a stranger once said to you that stuck?"]] }
+    21: { t: "Loser dances", ink: "light", s: [
+      ["first", "Rock, paper, scissors. Best of three."],
+      ["shoot", "Whoever loses dances in the busiest spot nearby. The winner shoots."],
+      ["ask", "Which song makes you dance no matter where you are?"]] }
   };
   const ROLLS = {
     original: { name: "The original", frames: FRAMES_A },
