@@ -387,9 +387,9 @@ button,input,textarea{font:inherit;color:inherit}
         <li>One camera, one night, 27 frames. No retakes and no peeking.</li>
         <li>We start at the table over drinks and end on the walk home.</li>
         <li>Every frame is a feeling, not a shot list. We agree on what fits, shoot it, then we both answer the question.</li>
-        <li>Flash on for anything within three steps. For lit signs and windows further away, flash off and hold very still.</li>
+        <li>Flash on for anything within three steps: we switch it on and wait for its little ready light. For lit signs and windows further away, flash off and hold very still.</li>
         <li>We wind the wheel until it stops after every shot.</li>
-        <li>We can skip anything, or deal a spare. A line in each note helps us match the prints later.</li>
+        <li>We can skip anything, or deal a spare. We jot one line per frame so we can match the prints later.</li>
       </ul>
     </div>
   </section>
@@ -432,8 +432,7 @@ button,input,textarea{font:inherit;color:inherit}
       <div class="spare" id="f-spare" hidden>
         <span class="spare-k">Spare frame, in place of this one</span>
         <p class="spare-title" id="spare-title"></p>
-        <p class="spare-text" id="spare-text"></p>
-        <div class="spare-acts">
+                <div class="spare-acts">
           <button class="linkish" type="button" id="spare-next">Deal another spare</button>
           <button class="linkish" type="button" id="spare-drop">Go back to the original</button>
         </div>
@@ -524,13 +523,13 @@ button,input,textarea{font:inherit;color:inherit}
     { t: "Directed by a stranger: take one", ink: "light", s: [
       ["shoot", "We hand the camera to a stranger (a waiter counts). They direct a photo of one of us: the spot, the pose, the face. The director's word is final."],
       ["ask", "What do you think they saw in you?"],
-      ["tip", "We show them the button and tell them to wait for the flash light."]] },
+      ["tip", "We switch the flash on and wait for its ready light, then hand over the camera and point to the shutter button."]] },
     { t: "Directed by a stranger: take two", ink: "light", s: [
       ["shoot", "Same stranger or a new one. Now the other one of us, same rules."],
       ["ask", "Who got the better director?"]] },
     { t: "Straight onto the list", ink: "tender", s: [
       ["shoot", "Let's shoot something that deserves a place on our list."],
-      ["ask", "Films, dishes or together?"],
+      ["ask", "Which part of the list does it go on: films, dishes, or things to do together?"],
       ["then", "If it's empanadas, it's already on there three times."]] },
 
     { t: "Gone by morning", ink: "deep", s: [
@@ -558,7 +557,7 @@ button,input,textarea{font:inherit;color:inherit}
       ["ask", "What do you miss from where you grew up that you can't quite explain to people here?"]] },
     { t: "Ten years ago", ink: "deep", s: [
       ["shoot", "Let's shoot something our ten-years-younger selves would not believe."],
-      ["ask", "What would you from ten years ago make of tonight?"]] },
+      ["ask", "What would ten-years-younger you make of tonight?"]] },
     { t: "The weight", ink: "deep", s: [
       ["shoot", "Let's shoot something that looks heavy."],
       ["ask", "What follows you around that you'd like to put down, just for tonight?"]] },
@@ -571,7 +570,7 @@ button,input,textarea{font:inherit;color:inherit}
       ["ask", "What is the least romantic way anyone has ever shown they loved you?"]] },
     { t: "Still waiting", ink: "deep", s: [
       ["shoot", "Let's shoot something that is waiting for someone."],
-      ["ask", "What are you quietly hoping for this year?"]] },
+      ["ask", "What are you quietly hoping for in the next year?"]] },
     { t: "Not in the chat", ink: "tender", s: [
       ["shoot", "Let's shoot something that feels like a secret."],
       ["ask", "Two months and thousands of messages: what is one true thing that somehow never came up?"]] },
@@ -587,7 +586,7 @@ button,input,textarea{font:inherit;color:inherit}
       ["ask", "What do you hope you're still doing when you're eighty?"]] },
     { t: "Both of us, roughly", ink: "light", s: [
       ["shoot", "We turn the camera around, arm's length, no countdown, and shoot whatever tonight has done to our faces."],
-      ["ask", "Let's log tonight on Letterboxd: title, stars, one-line review."],
+      ["ask", "Tonight on Letterboxd: what is the title, how many stars, and the one-line review?"],
       ["tip", "Lens facing us, flash on, thumb on the button."]] },
     { t: "The final frame", ink: "tender", s: [
       ["shoot", "Let's shoot the thing we'd want to see first when the prints come back."],
@@ -595,12 +594,12 @@ button,input,textarea{font:inherit;color:inherit}
   ];
 
   const SPARES = [
-    ["Lucky", "Let's shoot something that feels like luck."],
-    ["Braver than it feels", "Let's shoot something that looks braver than it feels."],
-    ["Needs a holiday", "Let's shoot something that looks like it needs a holiday."],
-    ["The best part of a song", "Let's shoot something that feels like the best part of a song."],
-    ["Patient", "Let's shoot something that has been patient for a very long time."],
-    ["Proof", "Let's shoot something that proves tonight happened."]
+    ["Lucky", "Let's shoot something that feels like luck.", "What is the luckiest thing that ever happened to you?"],
+    ["Braver than it feels", "Let's shoot something that looks braver than it feels.", "What did you do that looked braver than it felt?"],
+    ["Needs a holiday", "Let's shoot something that looks like it needs a holiday.", "Where should we go together next?"],
+    ["The best part of a song", "Let's shoot something that feels like the best part of a song.", "What song do you know every word of, and where did you learn it?"],
+    ["Patient", "Let's shoot something that has been patient for a very long time.", "What are you patient about that nobody would guess?"],
+    ["Proof", "Let's shoot something that proves tonight happened.", "What will you tell a friend about tonight?"]
   ];
 
   const PARTS = [
@@ -609,7 +608,7 @@ button,input,textarea{font:inherit;color:inherit}
     { to: 27, name: "Part three", sub: "The long way home" }
   ];
   const INK_NAME = { light: "Light", tender: "Tender", deep: "Deep" };
-  const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask each other", then: "Then", tip: "Camera tip" };
+  const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask each other", then: "P.S.", tip: "Camera tip" };
   const N = FRAMES.length;
   const LS = "night-roll:v2";
   const LS_THEME = "night-roll:theme";
@@ -732,19 +731,18 @@ button,input,textarea{font:inherit;color:inherit}
 
     const steps = $("#f-steps");
     steps.textContent = "";
-    for (const [k, t] of f.s) {
+    const list = s.spare != null ? [["shoot", SPARES[s.spare][1]], ["ask", SPARES[s.spare][2]]] : f.s;
+    for (const [k, t] of list) {
       const d = el("div", "step");
       d.dataset.k = k;
       d.append(el("span", "step-k", STEP_NAME[k]), el("p", "step-t", t));
       steps.append(d);
     }
-    steps.classList.toggle("is-swapped", s.spare != null);
 
     const sp = $("#f-spare");
     sp.hidden = s.spare == null;
     if (s.spare != null) {
       $("#spare-title").textContent = SPARES[s.spare][0];
-      $("#spare-text").textContent = SPARES[s.spare][1];
     }
     $("#f-spare-btn").hidden = s.spare != null;
 
@@ -976,6 +974,7 @@ button,input,textarea{font:inherit;color:inherit}
   paintLights();
   render(false);
   syncScrollMargin();
+  if (st.started) toBook();
 
   // Works offline once opened: the walk may not have signal.
   if ("serviceWorker" in navigator && location.protocol === "https:") {
