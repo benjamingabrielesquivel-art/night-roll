@@ -40,6 +40,11 @@
   --speck-filter:invert(1);
   color-scheme:dark;
   --acc:var(--pink);
+  /* hero palette, split-complementary around the soap: pink (330°) is the focal point,
+     the wall glows yellow-green (~95°) like the poster, blue (~207°) is the third ink.
+     The graffiti is the soap's hue, darker and duller, so it supports instead of competing. */
+  --wall:#A6D64B;         /* yellow-green wall light */
+  --spray:#A3214F;        /* deep raspberry spray paint */
   --soap:#F45BAA; --soap-hi:#FFC2E1; --soap-lo:#B8256F; --soap-edge:#C8347F; --soap-shade:rgba(25,24,29,.28);
   --skin:#F2B48E; --skin-hi:#F9CFB2; --nail:#F8DACB; --line:#19181D;  /* the fist and soap keep their own colours */
 
@@ -79,7 +84,6 @@ button,input,textarea{font:inherit;color:inherit}
 /* masthead */
 .mast{position:relative;isolation:isolate;display:grid;gap:.6rem;padding-block-end:clamp(16px,3vw,26px)}
 .mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.4rem 1rem}
-  font-size:clamp(3rem,15vw,7.2rem);line-height:.88;letter-spacing:-.005em;filter:url(#rough-lg)}
 .mast-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .mast-sub{margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;min-width:0}
 .mast-sub .label{color:var(--ink)}
@@ -90,28 +94,26 @@ button,input,textarea{font:inherit;color:inherit}
 .rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(22px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);max-width:36rem}
 .rules::before{content:"";position:absolute;top:-13px;left:50%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
-.wall{position:relative;isolation:isolate;margin-top:.2rem;padding-top:clamp(124px,33vw,190px)}
+.wall{position:relative;isolation:isolate;margin-top:.1rem;padding-bottom:.3rem}
 .hero{position:relative;z-index:1;margin:0 0 0 -10px;line-height:0}
 /* the lit brick wall from the poster, behind the fist, in riso yellow fading into the night */
-.wall::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-4%;bottom:6%;pointer-events:none;
+.wall::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-4%;bottom:-2%;pointer-events:none;
   background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='40'%3E%3Cpath d='M0 .75H56M0 20.75H56M.75 0V20.75M28.75 20.75V40' stroke='%23FFE631' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") 0 0/56px 40px,
-    radial-gradient(circle,color-mix(in srgb,var(--yellow) 75%,transparent) 0 1.3px,transparent 1.8px) 0 0/7px 7px,
-    radial-gradient(ellipse 55% 50% at 44% 48%,color-mix(in srgb,var(--yellow) 26%,transparent),transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 58% 52% at 52% 44%,#000 0%,rgba(0,0,0,.55) 48%,transparent 100%);
-  mask-image:radial-gradient(ellipse 58% 52% at 52% 44%,#000 0%,rgba(0,0,0,.55) 48%,transparent 100%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='40'%3E%3Cpath d='M0 .75H56M0 20.75H56M.75 0V20.75M28.75 20.75V40' stroke='%23A6D64B' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") 0 0/56px 40px,
+    radial-gradient(circle,color-mix(in srgb,var(--wall) 70%,transparent) 0 1.3px,transparent 1.8px) 0 0/7px 7px,
+    radial-gradient(ellipse 60% 55% at 50% 50%,color-mix(in srgb,var(--wall) 30%,transparent),transparent 72%);
+  -webkit-mask-image:radial-gradient(ellipse 66% 58% at 54% 52%,#000 0%,rgba(0,0,0,.55) 50%,transparent 100%);
+  mask-image:radial-gradient(ellipse 66% 58% at 54% 52%,#000 0%,rgba(0,0,0,.55) 50%,transparent 100%);
   opacity:.5;animation:wall-on 1.4s .2s ease-out both}
-/* the camera, one colour of spray paint on the wall */
-.graffiti{position:absolute;z-index:0;top:0;right:-2px;width:clamp(186px,54vw,290px);height:auto;overflow:visible;transform:rotate(-5deg);opacity:.92}
-.graffiti .sp{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
-.graffiti .fill{fill:var(--ink)}
-.graffiti .cut{stroke:var(--paper);stroke-width:2.6;stroke-linecap:round}
-.graffiti .wob{filter:url(#g-wobble)}
-.graffiti .haze{filter:url(#g-haze);opacity:.4}
-.graffiti .tag{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:19px;fill:var(--ink)}
-.graffiti text.n{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:13px;fill:var(--paper)}
-.graffiti .draw{stroke-dasharray:1;stroke-dashoffset:0;animation:spray-on 1.4s .35s ease-out both}
-@keyframes spray-on{from{stroke-dashoffset:1}}
+/* the camera, a one-colour stencil sprayed on the wall, low right, half behind the arm */
+.graffiti{flex:none;position:relative;z-index:0;width:clamp(160px,46vw,250px);height:auto;overflow:visible;margin:-2.4rem -8px 0 0;opacity:.96;animation:paint-on 1.3s .35s ease-out both}
+@keyframes paint-on{from{opacity:0;filter:blur(4px)}}
+.graffiti .fill{fill:var(--spray)}
+.graffiti .sp{fill:none;stroke:var(--spray);stroke-width:5;stroke-linecap:round}
+.graffiti .print{filter:url(#g-print)}
+.graffiti .haze{filter:url(#g-haze);opacity:.3}
+.graffiti .tag{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:18px;fill:var(--spray)}
+.graffiti .mtext{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:13px}
 @keyframes wall-on{0%{opacity:0}30%{opacity:.62}100%{opacity:.5}}
 .hero .fist{width:min(100%,460px);animation:raise 1s cubic-bezier(.2,.8,.2,1) both}
 @keyframes raise{from{transform:translateY(28px) rotate(3deg);opacity:.15}}
@@ -331,35 +333,6 @@ button,input,textarea{font:inherit;color:inherit}
       <span class="label">Shot on a disposable</span>
     </div>
     <div class="wall">
-      <svg class="graffiti" viewBox="0 0 260 188" aria-hidden="true">
-        <defs>
-          <filter id="g-haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.5"/></filter>
-          <filter id="g-wobble" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="11" result="t"/>
-            <feDisplacementMap in="SourceGraphic" in2="t" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-        </defs>
-        <g class="haze"><use href="#g-paint"/></g>
-        <g id="g-paint" class="wob">
-          <rect class="sp draw" pathLength="1" x="40" y="44" width="180" height="92" rx="12"/>
-          <path class="sp draw" pathLength="1" d="M42 64 Q130 59 218 64"/>
-          <rect class="sp draw" pathLength="1" x="56" y="30" width="28" height="14" rx="3"/>
-          <path class="sp draw" pathLength="1" d="M176 44 V28 H214 V44"/>
-          <path class="sp" style="stroke-width:3" d="M184 31v11M192 31v11M200 31v11M208 31v11"/>
-          <circle class="fill" cx="124" cy="54" r="11"/>
-          <text class="n" id="cam-count" x="124" y="59" text-anchor="middle">27</text>
-          <rect class="fill" x="52" y="74" width="40" height="26" rx="3"/>
-          <path class="cut" d="M58 81h28M58 87h28M58 93h28"/>
-          <rect class="sp draw" pathLength="1" x="194" y="74" width="20" height="13" rx="2" style="stroke-width:4"/>
-          <circle class="sp draw" pathLength="1" cx="148" cy="96" r="30" style="stroke-width:7"/>
-          <circle class="sp draw" pathLength="1" cx="148" cy="96" r="17"/>
-          <circle class="fill" cx="148" cy="96" r="7"/>
-          <path class="sp" style="stroke-width:3" d="M132 84 a20 20 0 0 1 10 -8"/>
-          <path class="sp draw" pathLength="1" d="M36 72 L12 63 M34 84 L6 86 M36 96 L13 108 M44 62 L28 41"/>
-          <path class="fill" d="M76 135 v18 a3.5 3.5 0 0 0 7 0 v-18z M160 135 v10 a3 3 0 0 0 6 0 v-10z M205 135 v25 a3.5 3.5 0 0 0 7 0 v-25z"/>
-          <text class="tag" x="104" y="184" transform="rotate(-5 104 184)">night roll '26</text>
-        </g>
-      </svg>
       <h1 class="hero">
         <svg class="fist" viewBox="0 0 400 370" role="img" aria-labelledby="fist-t">
               <title id="fist-t">Night Roll</title>
@@ -406,9 +379,59 @@ button,input,textarea{font:inherit;color:inherit}
               </g>
             </svg>
       </h1>
-    </div>
     <div class="mast-row">
   <p class="mast-sub"><span class="label">27 frames</span><span class="label">3 parts</span><span class="label">0 retakes</span></p>
+      <svg class="graffiti" viewBox="0 0 240 176" aria-hidden="true">
+        <defs>
+          <filter id="g-haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.5"/></filter>
+          <!-- sprayed onto a rough wall: soft wobble, and grain where the paint did not take -->
+          <filter id="g-print" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="11" result="warp"/>
+            <feDisplacementMap in="SourceGraphic" in2="warp" scale="2.5" xChannelSelector="R" yChannelSelector="G" result="wob"/>
+            <feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4" result="grain"/>
+            <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  -3 0 0 0 2.4" result="holes"/>
+            <feComposite in="wob" in2="holes" operator="in"/>
+          </filter>
+          <!-- the wall's mortar lines; the paint skips them. Lined up with the wall by script. -->
+          <pattern id="mortar" patternUnits="userSpaceOnUse" width="56" height="40">
+            <path d="M0 .75H56M0 20.75H56M.75 0V20.75M28.75 20.75V40" stroke="#000" stroke-width="2.6" fill="none"/>
+          </pattern>
+          <mask id="g-mortar" maskUnits="userSpaceOnUse" x="-60" y="-60" width="380" height="320">
+            <rect x="-60" y="-60" width="380" height="320" fill="#fff"/>
+            <rect x="-60" y="-60" width="380" height="320" fill="url(#mortar)"/>
+          </mask>
+          <!-- the stencil: black is cut out, white is painted; small white bridges hold the rings, as on a real stencil -->
+          <mask id="g-stencil" maskUnits="userSpaceOnUse" x="0" y="0" width="240" height="176">
+            <rect width="240" height="176" fill="#fff"/>
+            <path d="M34 62H206" stroke="#000" stroke-width="3.5"/>
+            <circle cx="140" cy="94" r="27" fill="none" stroke="#000" stroke-width="8.5"/>
+            <rect x="137" y="62" width="6" height="11" fill="#fff"/>
+            <rect x="137" y="115" width="6" height="11" fill="#fff"/>
+            <circle cx="131" cy="85" r="4.5" fill="#000"/>
+            <rect x="44" y="74" width="42" height="26" rx="2" fill="#000"/>
+            <path d="M44 83h42M44 91h42" stroke="#fff" stroke-width="3"/>
+            <rect x="184" y="74" width="22" height="14" rx="2" fill="#000"/>
+            <circle cx="104" cy="49" r="10" fill="#000"/>
+            <text class="mtext" id="cam-count" x="104" y="54" text-anchor="middle" fill="#fff">27</text>
+            <path d="M176 25v12M184 25v12M192 25v12M200 25v12" stroke="#000" stroke-width="3"/>
+            <text class="mtext" x="44" y="122" fill="#000" style="font-size:10px">27 EXP</text>
+          </mask>
+        </defs>
+        <g mask="url(#g-mortar)">
+          <g class="haze"><use href="#g-paint"/></g>
+          <g id="g-paint" class="print">
+            <g mask="url(#g-stencil)">
+              <rect class="fill" x="30" y="38" width="180" height="94" rx="12"/>
+              <rect class="fill" x="46" y="27" width="28" height="11" rx="2"/>
+              <rect class="fill" x="168" y="22" width="40" height="17" rx="2"/>
+            </g>
+            <path class="sp" d="M24 72 L5 63 M22 86 L1 87 M24 100 L7 110"/>
+            <path class="fill" d="M66 130 v20 a4 4 0 0 0 8 0 v-20z M150 130 v11 a3.5 3.5 0 0 0 7 0 v-11z M190 130 v27 a4 4 0 0 0 8 0 v-27z"/>
+            <text class="tag" x="92" y="170" transform="rotate(-5 92 170)">night roll '26</text>
+          </g>
+        </g>
+      </svg>
+    </div>
     </div>
     <p class="lede">let's take some random ass pics &lt;3</p>
   </header>
@@ -1048,6 +1071,25 @@ button,input,textarea{font:inherit;color:inherit}
     toast(`${ROLLS[r].name} loaded. Each roll keeps its own ticks and notes.`);
   }
   document.querySelectorAll(".roll-opt").forEach(b => b.addEventListener("click", () => setRoll(b.dataset.roll)));
+
+  // Line the paint's mortar gaps up with the wall's bricks (tile 56 x 40 px, drawn from the wall's top-left).
+  function alignMortar() {
+    const svg = $(".graffiti"), wall = $(".wall"), pat = document.getElementById("mortar");
+    if (!svg || !wall || !pat) return;
+    const sr = svg.getBoundingClientRect(), wr = wall.getBoundingClientRect();
+    if (!sr.width) return;
+    const k = svg.viewBox.baseVal.width / sr.width;
+    const ox = (wr.left - 16 - sr.left) * k, oy = (wr.top - wr.height * 0.04 - sr.top) * k;
+    pat.setAttribute("x", ox.toFixed(2));
+    pat.setAttribute("y", oy.toFixed(2));
+    pat.setAttribute("width", (56 * k).toFixed(3));
+    pat.setAttribute("height", (40 * k).toFixed(3));
+    pat.firstElementChild.setAttribute("transform", `scale(${k.toFixed(4)})`);
+  }
+  addEventListener("resize", alignMortar);
+  addEventListener("load", alignMortar);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignMortar);
+  alignMortar();
 
   addEventListener("resize", syncScrollMargin);
   render(false);
