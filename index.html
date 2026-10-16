@@ -80,24 +80,6 @@ button,input,textarea{font:inherit;color:inherit}
 .mast{position:relative;isolation:isolate;display:grid;gap:.6rem;padding-block-end:clamp(16px,3vw,26px)}
 .mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.4rem 1rem}
   font-size:clamp(3rem,15vw,7.2rem);line-height:.88;letter-spacing:-.005em;filter:url(#rough-lg)}
-/* the camera, sprayed on the wall */
-.cam{flex:none;width:clamp(150px,36vw,250px);height:auto;overflow:visible;transform:rotate(-7deg);margin-top:-.4rem}
-.cam .wob{filter:url(#wobble)}
-.cam .haze{filter:url(#overspray)}
-.cam .out{fill:none;stroke:var(--ink);stroke-width:8;stroke-linejoin:round;stroke-linecap:round}
-.cam .k{fill:none;stroke:#050507;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
-.cam .shadow{fill:#3A1C6E}
-.cam .ink{fill:#050507}
-.cam .lit{fill:var(--yellow)}
-.cam .pink{fill:var(--pink)}
-.cam .blue{fill:var(--blue)}
-.cam .white{fill:var(--ink)}
-.cam .shine{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-.cam .ray{stroke:var(--yellow);stroke-width:4;stroke-linecap:round}
-.cam .tag{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:17px;fill:var(--ink)}
-.cam text.n{font-family:var(--f-body);font-weight:900;font-size:11px;fill:#050507;font-variant-numeric:tabular-nums}
-.cam .burst{transform-origin:52px 80px;animation:pop-flash 1.6s .5s ease-out both}
-@keyframes pop-flash{0%{opacity:0;transform:scale(.4)}12%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
 .mast-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .mast-sub{margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;min-width:0}
 .mast-sub .label{color:var(--ink)}
@@ -108,16 +90,28 @@ button,input,textarea{font:inherit;color:inherit}
 .rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(22px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);max-width:36rem}
 .rules::before{content:"";position:absolute;top:-13px;left:50%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
-.hero{position:relative;isolation:isolate;margin:.1rem 0 0 -10px;line-height:0}
+.wall{position:relative;isolation:isolate;margin-top:.2rem;padding-top:clamp(124px,33vw,190px)}
+.hero{position:relative;z-index:1;margin:0 0 0 -10px;line-height:0}
 /* the lit brick wall from the poster, behind the fist, in riso yellow fading into the night */
-.hero::before{content:"";position:absolute;z-index:-1;left:-14%;right:-16px;top:-14%;bottom:-4%;pointer-events:none;
+.wall::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-4%;bottom:6%;pointer-events:none;
   background:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='40'%3E%3Cpath d='M0 .75H56M0 20.75H56M.75 0V20.75M28.75 20.75V40' stroke='%23FFE631' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") 0 0/56px 40px,
     radial-gradient(circle,color-mix(in srgb,var(--yellow) 75%,transparent) 0 1.3px,transparent 1.8px) 0 0/7px 7px,
     radial-gradient(ellipse 55% 50% at 44% 48%,color-mix(in srgb,var(--yellow) 26%,transparent),transparent 70%);
-  -webkit-mask-image:radial-gradient(ellipse 52% 50% at 42% 47%,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
-  mask-image:radial-gradient(ellipse 52% 50% at 42% 47%,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
+  -webkit-mask-image:radial-gradient(ellipse 58% 52% at 52% 44%,#000 0%,rgba(0,0,0,.55) 48%,transparent 100%);
+  mask-image:radial-gradient(ellipse 58% 52% at 52% 44%,#000 0%,rgba(0,0,0,.55) 48%,transparent 100%);
   opacity:.5;animation:wall-on 1.4s .2s ease-out both}
+/* the camera, one colour of spray paint on the wall */
+.graffiti{position:absolute;z-index:0;top:0;right:-2px;width:clamp(186px,54vw,290px);height:auto;overflow:visible;transform:rotate(-5deg);opacity:.92}
+.graffiti .sp{fill:none;stroke:var(--ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.graffiti .fill{fill:var(--ink)}
+.graffiti .cut{stroke:var(--paper);stroke-width:2.6;stroke-linecap:round}
+.graffiti .wob{filter:url(#g-wobble)}
+.graffiti .haze{filter:url(#g-haze);opacity:.4}
+.graffiti .tag{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:19px;fill:var(--ink)}
+.graffiti text.n{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:13px;fill:var(--paper)}
+.graffiti .draw{stroke-dasharray:1;stroke-dashoffset:0;animation:spray-on 1.4s .35s ease-out both}
+@keyframes spray-on{from{stroke-dashoffset:1}}
 @keyframes wall-on{0%{opacity:0}30%{opacity:.62}100%{opacity:.5}}
 .hero .fist{width:min(100%,460px);animation:raise 1s cubic-bezier(.2,.8,.2,1) both}
 @keyframes raise{from{transform:translateY(28px) rotate(3deg);opacity:.15}}
@@ -336,128 +330,85 @@ button,input,textarea{font:inherit;color:inherit}
       <span class="label">Vol. 2 · One roll, one night out</span>
       <span class="label">Shot on a disposable</span>
     </div>
-    <h1 class="hero">
-      <svg class="fist" viewBox="0 0 400 370" role="img" aria-labelledby="fist-t">
-            <title id="fist-t">Night Roll</title>
-            <defs>
-              <radialGradient id="soapG" cx=".3" cy=".22" r=".95">
-                <stop offset="0" stop-color="var(--soap-hi)"/>
-                <stop offset=".42" stop-color="var(--soap)"/>
-                <stop offset=".72" stop-color="var(--soap)"/>
-                <stop offset="1" stop-color="var(--soap-lo)"/>
-              </radialGradient>
-            </defs>
-            <g transform="rotate(-9 200 200)">
-              <!-- forearm and the back of the hand, behind the soap -->
-              <path class="plate" d="M150 262 C140 318 124 352 112 400 L290 400 C300 352 316 314 350 266 Z"/>
-              <path class="skin ln" d="M140 256 C130 314 116 350 104 400 L282 400 C292 350 308 312 344 262 Z"/>
-              <path class="skin ln" d="M64 128 C64 82 104 56 160 52 C222 48 286 56 306 88 L312 132 L64 132 Z"/>
-              <!-- the soap -->
-              <rect class="edge" x="44" y="118" width="320" height="176" rx="50"/>
-              <rect x="40" y="106" width="320" height="176" rx="50" fill="url(#soapG)" stroke="var(--line)" stroke-width="3.5"/>
-              <ellipse class="shine" cx="118" cy="146" rx="62" ry="14" transform="rotate(-6 118 146)"/>
-              <g transform="translate(228 214) skewX(-12)">
-                <text class="word w-hi" x="-2" y="-2">NIGHT</text>
-                <text class="word w-lo" x="2.5" y="3">NIGHT</text>
-                <text class="word w" x="0" y="0">NIGHT</text>
+    <div class="wall">
+      <svg class="graffiti" viewBox="0 0 260 188" aria-hidden="true">
+        <defs>
+          <filter id="g-haze" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3.5"/></filter>
+          <filter id="g-wobble" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="2" seed="11" result="t"/>
+            <feDisplacementMap in="SourceGraphic" in2="t" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+        </defs>
+        <g class="haze"><use href="#g-paint"/></g>
+        <g id="g-paint" class="wob">
+          <rect class="sp draw" pathLength="1" x="40" y="44" width="180" height="92" rx="12"/>
+          <path class="sp draw" pathLength="1" d="M42 64 Q130 59 218 64"/>
+          <rect class="sp draw" pathLength="1" x="56" y="30" width="28" height="14" rx="3"/>
+          <path class="sp draw" pathLength="1" d="M176 44 V28 H214 V44"/>
+          <path class="sp" style="stroke-width:3" d="M184 31v11M192 31v11M200 31v11M208 31v11"/>
+          <circle class="fill" cx="124" cy="54" r="11"/>
+          <text class="n" id="cam-count" x="124" y="59" text-anchor="middle">27</text>
+          <rect class="fill" x="52" y="74" width="40" height="26" rx="3"/>
+          <path class="cut" d="M58 81h28M58 87h28M58 93h28"/>
+          <rect class="sp draw" pathLength="1" x="194" y="74" width="20" height="13" rx="2" style="stroke-width:4"/>
+          <circle class="sp draw" pathLength="1" cx="148" cy="96" r="30" style="stroke-width:7"/>
+          <circle class="sp draw" pathLength="1" cx="148" cy="96" r="17"/>
+          <circle class="fill" cx="148" cy="96" r="7"/>
+          <path class="sp" style="stroke-width:3" d="M132 84 a20 20 0 0 1 10 -8"/>
+          <path class="sp draw" pathLength="1" d="M36 72 L12 63 M34 84 L6 86 M36 96 L13 108 M44 62 L28 41"/>
+          <path class="fill" d="M76 135 v18 a3.5 3.5 0 0 0 7 0 v-18z M160 135 v10 a3 3 0 0 0 6 0 v-10z M205 135 v25 a3.5 3.5 0 0 0 7 0 v-25z"/>
+          <text class="tag" x="104" y="184" transform="rotate(-5 104 184)">night roll '26</text>
+        </g>
+      </svg>
+      <h1 class="hero">
+        <svg class="fist" viewBox="0 0 400 370" role="img" aria-labelledby="fist-t">
+              <title id="fist-t">Night Roll</title>
+              <defs>
+                <radialGradient id="soapG" cx=".3" cy=".22" r=".95">
+                  <stop offset="0" stop-color="var(--soap-hi)"/>
+                  <stop offset=".42" stop-color="var(--soap)"/>
+                  <stop offset=".72" stop-color="var(--soap)"/>
+                  <stop offset="1" stop-color="var(--soap-lo)"/>
+                </radialGradient>
+              </defs>
+              <g transform="rotate(-9 200 200)">
+                <!-- forearm and the back of the hand, behind the soap -->
+                <path class="plate" d="M150 262 C140 318 124 352 112 400 L290 400 C300 352 316 314 350 266 Z"/>
+                <path class="skin ln" d="M140 256 C130 314 116 350 104 400 L282 400 C292 350 308 312 344 262 Z"/>
+                <path class="skin ln" d="M64 128 C64 82 104 56 160 52 C222 48 286 56 306 88 L312 132 L64 132 Z"/>
+                <!-- the soap -->
+                <rect class="edge" x="44" y="118" width="320" height="176" rx="50"/>
+                <rect x="40" y="106" width="320" height="176" rx="50" fill="url(#soapG)" stroke="var(--line)" stroke-width="3.5"/>
+                <ellipse class="shine" cx="118" cy="146" rx="62" ry="14" transform="rotate(-6 118 146)"/>
+                <g transform="translate(228 214) skewX(-12)">
+                  <text class="word w-hi" x="-2" y="-2">NIGHT</text>
+                  <text class="word w-lo" x="2.5" y="3">NIGHT</text>
+                  <text class="word w" x="0" y="0">NIGHT</text>
+                </g>
+                <g transform="translate(184 266) skewX(-12)">
+                  <text class="word w-hi" x="-2" y="-2">ROLL</text>
+                  <text class="word w-lo" x="2.5" y="3">ROLL</text>
+                  <text class="word w" x="0" y="0">ROLL</text>
+                </g>
+                <!-- thumb up the right side -->
+                <path class="skin ln" d="M326 268 C342 244 350 208 350 180 C350 160 360 146 376 148 C394 150 400 168 398 188 C395 226 380 262 360 290 Z"/>
+                <ellipse class="nail ln" cx="382" cy="172" rx="10" ry="15" transform="rotate(8 382 172)" style="stroke-width:2.5"/>
+                <!-- fingers curled over the top, nails toward us -->
+                <rect class="skin ln" x="76" y="84" width="48" height="64" rx="23"/>
+                <rect class="skin ln" x="124" y="70" width="56" height="86" rx="27"/>
+                <rect class="skin ln" x="180" y="64" width="58" height="94" rx="28"/>
+                <rect class="skin ln" x="238" y="70" width="56" height="88" rx="27"/>
+                <path class="crease" d="M86 108 q14 6 28 0 M136 98 q16 7 32 0 M192 94 q17 7 34 0 M250 98 q16 7 32 0"/>
+                <rect class="nail ln" x="88" y="122" width="24" height="18" rx="8" style="stroke-width:2.5"/>
+                <rect class="nail ln" x="138" y="130" width="28" height="19" rx="9" style="stroke-width:2.5"/>
+                <rect class="nail ln" x="195" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
+                <rect class="nail ln" x="252" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
               </g>
-              <g transform="translate(184 266) skewX(-12)">
-                <text class="word w-hi" x="-2" y="-2">ROLL</text>
-                <text class="word w-lo" x="2.5" y="3">ROLL</text>
-                <text class="word w" x="0" y="0">ROLL</text>
-              </g>
-              <!-- thumb up the right side -->
-              <path class="skin ln" d="M326 268 C342 244 350 208 350 180 C350 160 360 146 376 148 C394 150 400 168 398 188 C395 226 380 262 360 290 Z"/>
-              <ellipse class="nail ln" cx="382" cy="172" rx="10" ry="15" transform="rotate(8 382 172)" style="stroke-width:2.5"/>
-              <!-- fingers curled over the top, nails toward us -->
-              <rect class="skin ln" x="76" y="84" width="48" height="64" rx="23"/>
-              <rect class="skin ln" x="124" y="70" width="56" height="86" rx="27"/>
-              <rect class="skin ln" x="180" y="64" width="58" height="94" rx="28"/>
-              <rect class="skin ln" x="238" y="70" width="56" height="88" rx="27"/>
-              <path class="crease" d="M86 108 q14 6 28 0 M136 98 q16 7 32 0 M192 94 q17 7 34 0 M250 98 q16 7 32 0"/>
-              <rect class="nail ln" x="88" y="122" width="24" height="18" rx="8" style="stroke-width:2.5"/>
-              <rect class="nail ln" x="138" y="130" width="28" height="19" rx="9" style="stroke-width:2.5"/>
-              <rect class="nail ln" x="195" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
-              <rect class="nail ln" x="252" y="132" width="28" height="19" rx="9" style="stroke-width:2.5"/>
-            </g>
-          </svg>
-    </h1>
+            </svg>
+      </h1>
+    </div>
     <div class="mast-row">
   <p class="mast-sub"><span class="label">27 frames</span><span class="label">3 parts</span><span class="label">0 retakes</span></p>
-      <svg class="cam" viewBox="0 0 270 180" role="img" aria-label="A disposable camera sprayed as graffiti, flash firing">
-        <defs>
-          <filter id="overspray" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4"/></filter>
-          <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="t"/>
-            <feDisplacementMap in="SourceGraphic" in2="t" scale="4" xChannelSelector="R" yChannelSelector="G"/>
-          </filter>
-          <linearGradient id="sprayFill" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="var(--pink)"/>
-            <stop offset=".55" stop-color="var(--pink)"/>
-            <stop offset="1" stop-color="var(--blue)"/>
-          </linearGradient>
-        </defs>
-        <!-- overspray haze -->
-        <g class="haze" opacity=".55">
-          <rect class="pink" x="40" y="44" width="186" height="94" rx="14"/>
-          <circle class="lit" cx="70" cy="84" r="26"/>
-        </g>
-        <!-- flash going off, sprayed -->
-        <g class="burst">
-          <g class="haze" opacity=".7"><path class="ray" d="M38 74 L10 64 M37 84 L4 86 M39 94 L12 108 M46 64 L28 40 M58 60 L54 30"/></g>
-          <path class="ray" d="M38 74 L10 64 M37 84 L4 86 M39 94 L12 108 M46 64 L28 40 M58 60 L54 30"/>
-        </g>
-        <g class="wob">
-          <!-- 3D block shadow -->
-          <rect class="shadow" x="54" y="54" width="186" height="94" rx="14"/>
-          <!-- white outline, then the sprayed body -->
-          <rect class="out" x="46" y="46" width="186" height="94" rx="14"/>
-          <rect x="46" y="46" width="186" height="94" rx="14" fill="url(#sprayFill)"/>
-          <rect class="k" x="46" y="46" width="186" height="94" rx="14"/>
-          <path class="k" d="M46 66 Q139 60 232 66"/>
-          <!-- drips -->
-          <path class="pink" d="M84 138 v16 a4 4 0 0 0 8 0 v-16z M122 138 v9 a3.5 3.5 0 0 0 7 0 v-9z M196 138 v22 a4 4 0 0 0 8 0 v-22z"/>
-          <path class="lit" d="M66 104 v14 a3 3 0 0 0 6 0 v-14z"/>
-          <!-- shutter button and wind wheel -->
-          <rect class="out" x="62" y="34" width="28" height="12" rx="3" style="stroke-width:6"/>
-          <rect class="lit" x="62" y="34" width="28" height="12" rx="3"/>
-          <rect class="k" x="62" y="34" width="28" height="12" rx="3"/>
-          <rect class="out" x="182" y="28" width="40" height="18" rx="3" style="stroke-width:6"/>
-          <rect class="blue" x="182" y="28" width="40" height="18" rx="3"/>
-          <path class="k" d="M182 28h40v18h-40zM189 28v18M196 28v18M203 28v18M210 28v18M217 28v18"/>
-          <!-- counter -->
-          <circle class="white" cx="130" cy="56" r="10"/>
-          <circle class="k" cx="130" cy="56" r="10"/>
-          <text class="n" id="cam-count" x="130" y="60" text-anchor="middle">27</text>
-          <!-- flash window -->
-          <rect class="lit" x="54" y="74" width="44" height="28" rx="3"/>
-          <path d="M60 81h32M60 88h32M60 95h32" stroke="#050507" stroke-width="2" opacity=".5"/>
-          <rect class="k" x="54" y="74" width="44" height="28" rx="3"/>
-          <!-- viewfinder -->
-          <rect class="ink" x="202" y="74" width="22" height="15" rx="3"/>
-          <rect class="out" x="202" y="74" width="22" height="15" rx="3" style="stroke-width:3"/>
-          <!-- lens -->
-          <circle class="out" cx="156" cy="98" r="30"/>
-          <circle class="ink" cx="156" cy="98" r="30"/>
-          <circle class="blue" cx="156" cy="98" r="18" opacity=".9"/>
-          <circle class="ink" cx="156" cy="98" r="10"/>
-          <path class="shine" d="M140 86 a20 20 0 0 1 12 -9"/>
-          <circle class="white" cx="147" cy="90" r="3"/>
-          <!-- shines -->
-          <path class="shine" d="M60 56 l16 -2 M60 62 l6 -1"/>
-          <path class="white" d="M228 40 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z"/>
-          <path class="white" d="M108 150 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z"/>
-        </g>
-        <!-- paint speckles -->
-        <g opacity=".75">
-          <circle class="pink" cx="36" cy="132" r="1.6"/><circle class="pink" cx="30" cy="140" r="1"/><circle class="pink" cx="244" cy="70" r="1.8"/>
-          <circle class="pink" cx="250" cy="96" r="1.2"/><circle class="blue" cx="246" cy="130" r="1.6"/><circle class="blue" cx="238" cy="150" r="1"/>
-          <circle class="lit" cx="20" cy="50" r="1.4"/><circle class="lit" cx="70" cy="22" r="1.1"/><circle class="pink" cx="160" cy="20" r="1.3"/>
-          <circle class="blue" cx="44" cy="150" r="1.2"/><circle class="pink" cx="214" cy="166" r="1.5"/>
-        </g>
-        <!-- the tag -->
-        <text class="tag" x="150" y="172" transform="rotate(-4 150 172)">night roll '26</text>
-      </svg>
     </div>
     <p class="lede">let's take some random ass pics &lt;3</p>
   </header>
