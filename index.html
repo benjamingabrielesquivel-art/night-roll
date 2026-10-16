@@ -5,12 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Night Roll</title>
 <meta name="description" content="27 prompts and questions for one night out and one disposable camera.">
-<meta name="theme-color" content="#E3E4DE" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#121116" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#121116">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Night Roll">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -18,30 +17,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Dela+Gothic+One&family=Special+Elite&display=swap">
 <style>
-/* Layout: a riso-printed challenge book for one night walk and one disposable camera. Masthead and a photo-lab envelope, a sticky frame counter, then one taped-down sheet per frame (or the whole roll as a contact sheet), ending on a ransom-note "that's the roll". */
+/* Layout: a riso-printed challenge book for one night walk and one disposable camera. Dark only. Masthead and the house rules, a sticky frame counter, then one taped-down sheet per frame (or the whole roll as a contact sheet), ending on a ransom-note "that's the roll". */
 :root{
-  --paper:#E3E4DE;        /* newsprint */
-  --sheet:#F3F3EF;        /* the taped-down sheet */
-  --ink:#19181D;          /* toner black */
-  --ink-soft:#57555E;
-  --pink:#FF48B0;         /* fluorescent pink: tender */
-  --yellow:#FFE800;       /* yellow: light */
-  --blue:#45A0F0;         /* blue: deep */
-  --on-ink:#F3F3EF;
-  --on-acc:#19181D;       /* text on any spot-ink fill, both themes */
-  --film:#19181D;         /* negative strip */
-  --film-frame:#F3F3EF;
-  --film-hole:#E3E4DE;
+  --paper:#121116;        /* night newsprint */
+  --sheet:#1C1B21;        /* the taped-down sheet */
+  --ink:#EDECE6;          /* light toner */
+  --ink-soft:#A7A5AE;
+  --pink:#FF5CBA;         /* fluorescent pink: tender */
+  --yellow:#FFE631;       /* yellow: light */
+  --blue:#5AAEF5;         /* blue: deep */
+  --on-ink:#121116;
+  --on-acc:#121116;       /* text on any spot-ink fill */
+  --film:#050507;         /* negative strip */
+  --film-frame:#2A2930;
+  --film-hole:#121116;
   --film-mark:#FFB23F;    /* edge print on the film */
-  --tape:rgba(255,246,170,.6);
-  --plate-blend:multiply;
-  --grain-blend:multiply;
-  --grain-op:.15;
-  --speck-op:.5;
-  --speck-filter:none;
+  --tape:rgba(255,255,255,.16);
+  --plate-blend:screen;
+  --grain-blend:screen;
+  --grain-op:.09;
+  --speck-op:.35;
+  --speck-filter:invert(1);
+  color-scheme:dark;
   --acc:var(--pink);
   --soap:#F45BAA; --soap-hi:#FFC2E1; --soap-lo:#B8256F; --soap-edge:#C8347F; --soap-shade:rgba(25,24,29,.28);
-  --skin:#F2B48E; --skin-hi:#F9CFB2; --nail:#F8DACB; --line:#19181D;  /* the fist and soap are an object: same colours in both themes */
+  --skin:#F2B48E; --skin-hi:#F9CFB2; --nail:#F8DACB; --line:#19181D;  /* the fist and soap keep their own colours */
 
   --f-display:"Dela Gothic One","Arial Black",Impact,sans-serif;
   --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
@@ -52,26 +52,6 @@
   --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --specks:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='s' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -16 0 0 0 4.0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
   --wear:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='w' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 14 0 0 0 -2.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --paper:#121116; --sheet:#1C1B21; --ink:#EDECE6; --ink-soft:#A7A5AE;
-    --pink:#FF5CBA; --yellow:#FFE631; --blue:#5AAEF5;
-    --on-ink:#121116; --on-acc:#121116;
-    --film:#050507; --film-frame:#2A2930; --film-hole:#121116; --film-mark:#FFB23F;
-    --tape:rgba(255,255,255,.16);
-    --plate-blend:screen; --grain-blend:screen; --grain-op:.09; --speck-op:.35; --speck-filter:invert(1);
-    color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --paper:#121116; --sheet:#1C1B21; --ink:#EDECE6; --ink-soft:#A7A5AE;
-  --pink:#FF5CBA; --yellow:#FFE631; --blue:#5AAEF5;
-  --on-ink:#121116; --on-acc:#121116;
-  --film:#050507; --film-frame:#2A2930; --film-hole:#121116; --film-mark:#FFB23F;
-  --tape:rgba(255,255,255,.16);
-  --plate-blend:screen; --grain-blend:screen; --grain-op:.09; --speck-op:.35; --speck-filter:invert(1);
-  color-scheme:dark;
 }
 [data-ink="light"]{--acc:var(--yellow)}
 [data-ink="tender"]{--acc:var(--pink)}
@@ -123,23 +103,9 @@ button,input,textarea{font:inherit;color:inherit}
 .mast-sub .label{color:var(--ink)}
 .lede{margin:.7rem 0 0;max-width:38rem;font-family:var(--f-type);font-size:clamp(1.3rem,5vw,1.75rem);line-height:1.25}
 
-/* envelope + rules */
+/* house rules */
 .intro{display:grid;gap:clamp(18px,3vw,26px);grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));align-items:start;margin-top:clamp(10px,2vw,18px)}
-.envelope{position:relative;color:var(--on-acc);background:var(--yellow);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);
-  padding:clamp(48px,7vw,58px) clamp(14px,3vw,24px) clamp(16px,3vw,22px);transform:rotate(-.6deg)}
-.envelope::before{content:"";position:absolute;inset:0 0 auto 0;height:34px;border-bottom:2px dashed color-mix(in srgb,var(--on-acc) 55%,transparent);
-  background:radial-gradient(circle,color-mix(in srgb,var(--on-acc) 22%,transparent) 1px,transparent 1.6px) 0 0/6px 6px}
-.env-head{position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;gap:.5rem;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase}
-.env-title{margin:0 0 .8rem;font-family:var(--f-display);font-weight:400;font-size:clamp(1.3rem,4.6vw,1.75rem);line-height:1;text-transform:uppercase}
-.env-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.55rem .8rem;align-items:baseline;margin:0}
-.env-grid dt{font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.env-grid dd{margin:0;font-weight:700;min-width:0}
-.env-input{width:100%;min-width:0;border:0;border-bottom:2px solid var(--on-acc);background:transparent;color:var(--on-acc);padding:.15rem 0;font-weight:700;font-size:var(--t-md);border-radius:0}
-.env-input::placeholder{color:color-mix(in srgb,var(--on-acc) 55%,transparent);opacity:1;font-weight:500}
-.env-input:focus-visible{outline:3px solid var(--on-acc);outline-offset:2px}
-.env-pair{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
-.env-foot{margin:1rem 0 0;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.03em}
-.rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);margin-top:70px}
+.rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);margin-top:70px;max-width:36rem}
 .rules::before{display:none;content:"";position:absolute;top:-13px;left:78%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
 .rules .rules-title{margin:-104px 0 .2rem -6px;line-height:0;text-shadow:none}
@@ -393,21 +359,6 @@ button,input,textarea{font:inherit;color:inherit}
   </header>
 
   <section class="intro" aria-label="Before we start">
-    <div class="envelope">
-      <div class="env-head" aria-hidden="true"><span>Photo lab · order envelope</span><span>Roll No. 001</span></div>
-      <h2 class="env-title">Order envelope</h2>
-      <dl class="env-grid">
-        <dt>Name</dt>
-        <dd>us &lt;3</dd>
-        <dt>Date</dt>
-        <dd id="env-date">Tonight</dd>
-        <dt>Film</dt>
-        <dd class="env-pair"><span>27 exp.</span><span>Process C-41</span></dd>
-        <dt>Order</dt>
-        <dd>Develop · 1 set of prints · 1 new line on the list</dd>
-      </dl>
-    </div>
-
     <div class="rules">
       <h2 class="rules-title">
         <svg class="fist" viewBox="0 0 400 370" role="img" aria-labelledby="fist-t">
@@ -484,7 +435,6 @@ button,input,textarea{font:inherit;color:inherit}
       <span class="sr" id="count-sr">27 frames left</span>
     </div>
     <div class="strip" id="strip" aria-hidden="true"></div>
-    <button class="icon-btn" type="button" id="lights" aria-label="Lights down" title="Lights down"></button>
   </div>
 </div>
 
@@ -717,12 +667,9 @@ button,input,textarea{font:inherit;color:inherit}
   };
   const N = FRAMES_A.length;
   const LS = "night-roll:v2";
-  const LS_THEME = "night-roll:theme";
   const LS_ROLL = "night-roll:roll";
   const keyFor = r => r === "original" ? LS : LS + ":" + r;
 
-  const ICON_MOON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg>';
-  const ICON_SUN = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2.3" stroke-linecap="square"/></svg>';
 
   const $ = s => document.querySelector(s);
   const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
@@ -783,26 +730,6 @@ button,input,textarea{font:inherit;color:inherit}
   const edit = n => (st.frames[n] = st.frames[n] || { shot: false, note: "", spare: null });
   const shotCount = () => FRAMES.reduce((c, _, i) => c + (fr(i + 1).shot ? 1 : 0), 0);
   const partOf = n => PARTS.find(p => n <= p.to);
-  /* ---------- theme ---------- */
-
-  const root = document.documentElement;
-  try { const t = localStorage.getItem(LS_THEME); if (t === "dark" || t === "light") root.dataset.theme = t; } catch {}
-  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-  function paintLights() {
-    const b = $("#lights"), d = isDark();
-    b.innerHTML = d ? ICON_SUN : ICON_MOON;
-    const label = d ? "Lights up" : "Lights down";
-    b.setAttribute("aria-label", label);
-    b.title = label;
-  }
-  $("#lights").addEventListener("click", () => {
-    const next = isDark() ? "light" : "dark";
-    root.dataset.theme = next;
-    try { localStorage.setItem(LS_THEME, next); } catch {}
-    paintLights();
-  });
-  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", paintLights);
-
   /* ---------- toast ---------- */
 
   let toastTimer = null;
@@ -1039,7 +966,6 @@ button,input,textarea{font:inherit;color:inherit}
 
   const today = new Date();
   const dateStr = `${pad(today.getDate())} · ${pad(today.getMonth() + 1)} · ${today.getFullYear()}`;
-  $("#env-date").textContent = dateStr;
   $("#end-date").textContent = dateStr;
 
   function notesText() {
@@ -1116,7 +1042,6 @@ button,input,textarea{font:inherit;color:inherit}
   document.querySelectorAll(".roll-opt").forEach(b => b.addEventListener("click", () => setRoll(b.dataset.roll)));
 
   addEventListener("resize", syncScrollMargin);
-  paintLights();
   render(false);
   syncScrollMargin();
   if (st.started) toBook();
