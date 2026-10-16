@@ -1069,7 +1069,21 @@ button,input,textarea{font:inherit;color:inherit}
 
   // Works offline once opened: the walk may not have signal.
   if ("serviceWorker" in navigator && location.protocol === "https:") {
-    navigator.serviceWorker.register("sw.js").catch(() => {});
+    // Check for a newer version whenever the app comes back to the front, and switch to it.
+    navigator.serviceWorker.register("sw.js").then(reg => {
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") reg.update().catch(() => {});
+      });
+    }).catch(() => {});
+    const hadController = !!navigator.serviceWorker.controller;
+    let reloading = false;
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!hadController || reloading) return;
+      if (document.activeElement && document.activeElement.id === "f-note") return;
+      reloading = true;
+      flush();
+      location.reload();
+    });
   }
 })();
 </script>
