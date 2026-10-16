@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Dela+Gothic+One&family=Special+Elite&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Dela+Gothic+One&family=Permanent+Marker&family=Special+Elite&display=swap">
 <style>
 /* Layout: a riso-printed challenge book for one night walk and one disposable camera. Dark only. Masthead and the rules, a sticky frame counter, then one taped-down sheet per frame (or the whole roll as a contact sheet), ending on a ransom-note "that's the roll". */
 :root{
@@ -80,22 +80,24 @@ button,input,textarea{font:inherit;color:inherit}
 .mast{position:relative;isolation:isolate;display:grid;gap:.6rem;padding-block-end:clamp(16px,3vw,26px)}
 .mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.4rem 1rem}
   font-size:clamp(3rem,15vw,7.2rem);line-height:.88;letter-spacing:-.005em;filter:url(#rough-lg)}
-.cam{flex:none;width:clamp(120px,28vw,220px);height:auto;overflow:visible;transform:rotate(-8deg);margin-top:-.6rem}
-.cam .k{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
-.cam .body{fill:var(--film)}
-.cam .top{fill:var(--film-frame)}
-.cam .void{fill:#000}
-.cam .p-p{fill:var(--pink);mix-blend-mode:var(--plate-blend);opacity:.8}
-.cam .p-b{fill:var(--blue);mix-blend-mode:var(--plate-blend);opacity:.8}
+/* the camera, sprayed on the wall */
+.cam{flex:none;width:clamp(150px,36vw,250px);height:auto;overflow:visible;transform:rotate(-7deg);margin-top:-.4rem}
+.cam .wob{filter:url(#wobble)}
+.cam .haze{filter:url(#overspray)}
+.cam .out{fill:none;stroke:var(--ink);stroke-width:8;stroke-linejoin:round;stroke-linecap:round}
+.cam .k{fill:none;stroke:#050507;stroke-width:3;stroke-linejoin:round;stroke-linecap:round}
+.cam .shadow{fill:#3A1C6E}
+.cam .ink{fill:#050507}
 .cam .lit{fill:var(--yellow)}
-.cam .btn-p{fill:var(--pink)}
-.cam .glow{fill:url(#flashGlow)}
-.cam .ray{stroke:var(--yellow);stroke-width:3;stroke-linecap:round}
-.cam .dial{fill:var(--ink)}
-.cam .tiny{font-family:var(--f-type);font-size:7.5px;letter-spacing:.06em;fill:var(--ink-soft)}
-.cam .burst{transform-origin:46px 77px;animation:pop-flash 1.6s .5s ease-out both}
+.cam .pink{fill:var(--pink)}
+.cam .blue{fill:var(--blue)}
+.cam .white{fill:var(--ink)}
+.cam .shine{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.cam .ray{stroke:var(--yellow);stroke-width:4;stroke-linecap:round}
+.cam .tag{font-family:"Permanent Marker","Comic Sans MS",cursive;font-size:17px;fill:var(--ink)}
+.cam text.n{font-family:var(--f-body);font-weight:900;font-size:11px;fill:#050507;font-variant-numeric:tabular-nums}
+.cam .burst{transform-origin:52px 80px;animation:pop-flash 1.6s .5s ease-out both}
 @keyframes pop-flash{0%{opacity:0;transform:scale(.4)}12%{opacity:1;transform:scale(1.08)}100%{opacity:1;transform:scale(1)}}
-.cam text.n{font-family:var(--f-body);font-weight:800;font-size:10px;fill:var(--paper);font-variant-numeric:tabular-nums}
 .mast-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
 .mast-sub{margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;min-width:0}
 .mast-sub .label{color:var(--ink)}
@@ -382,52 +384,79 @@ button,input,textarea{font:inherit;color:inherit}
     </h1>
     <div class="mast-row">
   <p class="mast-sub"><span class="label">27 frames</span><span class="label">3 parts</span><span class="label">0 retakes</span></p>
-      <svg class="cam" viewBox="0 0 240 150" role="img" aria-label="A black disposable camera, flash firing">
+      <svg class="cam" viewBox="0 0 270 180" role="img" aria-label="A disposable camera sprayed as graffiti, flash firing">
         <defs>
-          <radialGradient id="flashGlow" cx=".5" cy=".5" r=".5">
-            <stop offset="0" stop-color="var(--yellow)" stop-opacity=".55"/>
-            <stop offset="1" stop-color="var(--yellow)" stop-opacity="0"/>
-          </radialGradient>
+          <filter id="overspray" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="4"/></filter>
+          <filter id="wobble" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="7" result="t"/>
+            <feDisplacementMap in="SourceGraphic" in2="t" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+          </filter>
+          <linearGradient id="sprayFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--pink)"/>
+            <stop offset=".55" stop-color="var(--pink)"/>
+            <stop offset="1" stop-color="var(--blue)"/>
+          </linearGradient>
         </defs>
-        <!-- the flash going off -->
-        <g class="burst">
-          <circle class="glow" cx="66" cy="77" r="52"/>
-          <path class="ray" d="M34 70 L8 62 M33 79 L2 80 M35 88 L10 99 M42 62 L24 40 M52 58 L46 30 M42 95 L28 117"/>
+        <!-- overspray haze -->
+        <g class="haze" opacity=".55">
+          <rect class="pink" x="40" y="44" width="186" height="94" rx="14"/>
+          <circle class="lit" cx="70" cy="84" r="26"/>
         </g>
-        <!-- strap -->
-        <path class="k" d="M206 120 C214 138 228 146 238 140" style="stroke-width:2.2"/>
-        <!-- misregistered plates -->
-        <rect class="p-p" x="44" y="45" width="180" height="88" rx="10"/>
-        <circle class="p-b" cx="150" cy="84" r="29"/>
-        <!-- body -->
-        <rect class="body" x="40" y="40" width="180" height="88" rx="10"/>
-        <rect class="top" x="40" y="40" width="180" height="18" rx="10"/>
-        <rect class="top" x="40" y="50" width="180" height="8"/>
-        <rect class="k" x="40" y="40" width="180" height="88" rx="10"/>
-        <path class="k" d="M40 58h180"/>
-        <!-- shutter button, wind wheel, counter -->
-        <rect class="btn-p" x="56" y="31" width="26" height="9" rx="2"/>
-        <rect class="k" x="56" y="31" width="26" height="9" rx="2"/>
-        <rect class="top" x="172" y="25" width="38" height="15"/>
-        <path class="k" d="M172 25h38v15h-38zM178 25v15M184 25v15M190 25v15M196 25v15M202 25v15"/>
-        <circle class="dial" cx="118" cy="49" r="8.5"/>
-        <text class="n" id="cam-count" x="118" y="52.5" text-anchor="middle">27</text>
-        <!-- flash window, lit -->
-        <rect class="lit" x="50" y="66" width="40" height="24" rx="2"/>
-        <path d="M54 72h32M54 78h32M54 84h32" stroke="var(--film)" stroke-width="1.6" opacity=".55"/>
-        <rect class="k" x="50" y="66" width="40" height="24" rx="2"/>
-        <!-- viewfinder -->
-        <rect class="void" x="188" y="66" width="20" height="13" rx="2"/>
-        <rect class="k" x="188" y="66" width="20" height="13" rx="2"/>
-        <!-- lens -->
-        <circle class="void" cx="146" cy="88" r="27"/>
-        <circle class="k" cx="146" cy="88" r="27"/>
-        <circle class="k" cx="146" cy="88" r="18" style="stroke-width:1.6;opacity:.6"/>
-        <circle class="p-p" cx="142" cy="84" r="9" style="opacity:.45"/>
-        <circle class="p-b" cx="150" cy="92" r="9" style="opacity:.45"/>
-        <circle cx="138" cy="79" r="3" fill="var(--ink)"/>
-        <!-- label -->
-        <text class="tiny" x="60" y="118">ISO 800 · 27 EXP</text>
+        <!-- flash going off, sprayed -->
+        <g class="burst">
+          <g class="haze" opacity=".7"><path class="ray" d="M38 74 L10 64 M37 84 L4 86 M39 94 L12 108 M46 64 L28 40 M58 60 L54 30"/></g>
+          <path class="ray" d="M38 74 L10 64 M37 84 L4 86 M39 94 L12 108 M46 64 L28 40 M58 60 L54 30"/>
+        </g>
+        <g class="wob">
+          <!-- 3D block shadow -->
+          <rect class="shadow" x="54" y="54" width="186" height="94" rx="14"/>
+          <!-- white outline, then the sprayed body -->
+          <rect class="out" x="46" y="46" width="186" height="94" rx="14"/>
+          <rect x="46" y="46" width="186" height="94" rx="14" fill="url(#sprayFill)"/>
+          <rect class="k" x="46" y="46" width="186" height="94" rx="14"/>
+          <path class="k" d="M46 66 Q139 60 232 66"/>
+          <!-- drips -->
+          <path class="pink" d="M84 138 v16 a4 4 0 0 0 8 0 v-16z M122 138 v9 a3.5 3.5 0 0 0 7 0 v-9z M196 138 v22 a4 4 0 0 0 8 0 v-22z"/>
+          <path class="lit" d="M66 104 v14 a3 3 0 0 0 6 0 v-14z"/>
+          <!-- shutter button and wind wheel -->
+          <rect class="out" x="62" y="34" width="28" height="12" rx="3" style="stroke-width:6"/>
+          <rect class="lit" x="62" y="34" width="28" height="12" rx="3"/>
+          <rect class="k" x="62" y="34" width="28" height="12" rx="3"/>
+          <rect class="out" x="182" y="28" width="40" height="18" rx="3" style="stroke-width:6"/>
+          <rect class="blue" x="182" y="28" width="40" height="18" rx="3"/>
+          <path class="k" d="M182 28h40v18h-40zM189 28v18M196 28v18M203 28v18M210 28v18M217 28v18"/>
+          <!-- counter -->
+          <circle class="white" cx="130" cy="56" r="10"/>
+          <circle class="k" cx="130" cy="56" r="10"/>
+          <text class="n" id="cam-count" x="130" y="60" text-anchor="middle">27</text>
+          <!-- flash window -->
+          <rect class="lit" x="54" y="74" width="44" height="28" rx="3"/>
+          <path d="M60 81h32M60 88h32M60 95h32" stroke="#050507" stroke-width="2" opacity=".5"/>
+          <rect class="k" x="54" y="74" width="44" height="28" rx="3"/>
+          <!-- viewfinder -->
+          <rect class="ink" x="202" y="74" width="22" height="15" rx="3"/>
+          <rect class="out" x="202" y="74" width="22" height="15" rx="3" style="stroke-width:3"/>
+          <!-- lens -->
+          <circle class="out" cx="156" cy="98" r="30"/>
+          <circle class="ink" cx="156" cy="98" r="30"/>
+          <circle class="blue" cx="156" cy="98" r="18" opacity=".9"/>
+          <circle class="ink" cx="156" cy="98" r="10"/>
+          <path class="shine" d="M140 86 a20 20 0 0 1 12 -9"/>
+          <circle class="white" cx="147" cy="90" r="3"/>
+          <!-- shines -->
+          <path class="shine" d="M60 56 l16 -2 M60 62 l6 -1"/>
+          <path class="white" d="M228 40 l2.5 7 7 2.5 -7 2.5 -2.5 7 -2.5 -7 -7 -2.5 7 -2.5z"/>
+          <path class="white" d="M108 150 l1.6 4.4 4.4 1.6 -4.4 1.6 -1.6 4.4 -1.6 -4.4 -4.4 -1.6 4.4 -1.6z"/>
+        </g>
+        <!-- paint speckles -->
+        <g opacity=".75">
+          <circle class="pink" cx="36" cy="132" r="1.6"/><circle class="pink" cx="30" cy="140" r="1"/><circle class="pink" cx="244" cy="70" r="1.8"/>
+          <circle class="pink" cx="250" cy="96" r="1.2"/><circle class="blue" cx="246" cy="130" r="1.6"/><circle class="blue" cx="238" cy="150" r="1"/>
+          <circle class="lit" cx="20" cy="50" r="1.4"/><circle class="lit" cx="70" cy="22" r="1.1"/><circle class="pink" cx="160" cy="20" r="1.3"/>
+          <circle class="blue" cx="44" cy="150" r="1.2"/><circle class="pink" cx="214" cy="166" r="1.5"/>
+        </g>
+        <!-- the tag -->
+        <text class="tag" x="150" y="172" transform="rotate(-4 150 172)">night roll '26</text>
       </svg>
     </div>
     <p class="lede">let's take some random ass pics &lt;3</p>
