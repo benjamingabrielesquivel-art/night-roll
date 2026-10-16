@@ -40,6 +40,7 @@
   --speck-op:.5;
   --speck-filter:none;
   --acc:var(--pink);
+  --soap:#F45BAA; --soap-hi:#FFC2E1; --soap-lo:#B8256F; --soap-edge:#C8347F; --soap-shade:rgba(25,24,29,.28);
 
   --f-display:"Dela Gothic One","Arial Black",Impact,sans-serif;
   --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
@@ -138,8 +139,17 @@ button,input,textarea{font:inherit;color:inherit}
 .env-pair{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
 .env-foot{margin:1rem 0 0;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.03em}
 .rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px)}
-.rules::before{content:"";position:absolute;top:-13px;left:50%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
+.rules::before{content:"";position:absolute;top:-13px;left:78%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
+.rules .soap{position:relative;display:inline-block;margin:-46px 0 1rem -6px;padding:.6rem 1.15rem .7rem;border-radius:26px/30px;text-shadow:none;
+  background:radial-gradient(120% 95% at 28% 18%,var(--soap-hi) 0%,var(--soap) 42%,var(--soap) 64%,var(--soap-lo) 118%);
+  box-shadow:inset 0 3px 7px rgba(255,255,255,.55),inset 0 -7px 12px rgba(110,0,55,.32),0 9px 0 -1px var(--soap-edge),0 15px 20px var(--soap-shade);
+  transform:rotate(-7deg)}
+.soap::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background-image:var(--grain);background-size:180px;mix-blend-mode:soft-light;opacity:.35}
+.soap-text{display:grid;font-family:var(--f-body);font-weight:900;font-stretch:72%;text-transform:uppercase;line-height:.84;font-size:clamp(2.1rem,9.4vw,2.9rem);letter-spacing:-.01em;
+  color:var(--soap);transform:skewX(-13deg);
+  text-shadow:-1px -1px 0 var(--soap-hi),-2px -2px 2px rgba(255,255,255,.5),1px 1px 0 var(--soap-lo),2px 3px 3px rgba(110,0,55,.5)}
+.soap-text span:first-child{margin-left:.55em}
 .rules h2{margin:0 0 .7rem;font-family:var(--f-display);font-weight:400;font-size:clamp(1.3rem,4.6vw,1.75rem);line-height:1;text-shadow:.05em .045em 0 var(--blue)}
 .rules ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
 .rules li{display:grid;grid-template-columns:.8rem minmax(0,1fr);gap:.6rem;align-items:baseline}
@@ -391,16 +401,16 @@ button,input,textarea{font:inherit;color:inherit}
     </div>
 
     <div class="rules">
-      <h2>The rules of Night Roll</h2>
+      <h2 class="soap"><span class="soap-text"><span>House</span><span>rules</span></span></h2>
       <ul>
-        <li>The first rule of Night Roll is: we do not peek at the photos.</li>
-        <li>The second rule of Night Roll is: we <strong>do not</strong> peek at the photos.</li>
-        <li>Third rule: if someone says skip, the frame is over. Or we deal a spare.</li>
-        <li>Fourth rule: two people to a camera. Strangers only when a frame invites them.</li>
-        <li>Fifth rule: one shot per frame. No retakes, and one line in the note.</li>
-        <li>Sixth rule: flash on for anything within three steps, and we wait for its ready light. Far-off signs and windows: flash off, hold very still.</li>
-        <li>Seventh rule: the night goes on as long as it has to. We wind the wheel until it stops, every time.</li>
-        <li>And the eighth and final rule: if this is our first roll together, we have to shoot.</li>
+        <li><span>The first rule of house rules is: there are no house rules.</span></li>
+        <li><span>The second rule of house rules is: we <strong>do not</strong> speak about the house rules.</span></li>
+        <li><span>Third rule: we do not peek at the photos.</span></li>
+        <li><span>Fourth rule: if someone says skip, the frame is over. Or we deal a spare.</span></li>
+        <li><span>Fifth rule: one shot per frame. No retakes, and one line in the note.</span></li>
+        <li><span>Sixth rule: flash on for anything within three steps, and we wait for its ready light. Far-off signs and windows: flash off, hold very still.</span></li>
+        <li><span>Seventh rule: the night goes on as long as it has to. We wind the wheel until it stops, every time.</span></li>
+        <li><span>And the eighth and final rule: if this is our first roll together, we have to shoot.</span></li>
       </ul>
     </div>
   </section>
