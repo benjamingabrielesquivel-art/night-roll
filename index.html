@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Night Roll</title>
+<meta name="description" content="27 prompts for one night walk and one disposable camera.">
+<meta name="theme-color" content="#E3E4DE" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121116" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Night Roll">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Dela+Gothic+One&family=Special+Elite&display=swap">
+<style>
+/* Layout: a riso-printed challenge book for one night walk and one disposable camera. Masthead and a photo-lab envelope, a sticky frame counter, then one taped-down sheet per frame (or the whole roll as a contact sheet), ending on a ransom-note "that's the roll". */
+:root{
+  --paper:#E3E4DE;        /* newsprint */
+  --sheet:#F3F3EF;        /* the taped-down sheet */
+  --ink:#19181D;          /* toner black */
+  --ink-soft:#57555E;
+  --pink:#FF48B0;         /* fluorescent pink: tender */
+  --yellow:#FFE800;       /* yellow: light */
+  --blue:#45A0F0;         /* blue: deep */
+  --on-ink:#F3F3EF;
+  --on-acc:#19181D;       /* text on any spot-ink fill, both themes */
+  --film:#19181D;         /* negative strip */
+  --film-frame:#F3F3EF;
+  --film-hole:#E3E4DE;
+  --film-mark:#FFB23F;    /* edge print on the film */
+  --tape:rgba(255,246,170,.6);
+  --plate-blend:multiply;
+  --grain-blend:multiply;
+  --grain-op:.15;
+  --speck-op:.5;
+  --speck-filter:none;
+  --acc:var(--pink);
+
+  --f-display:"Dela Gothic One","Arial Black",Impact,sans-serif;
+  --f-body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-type:"Special Elite","Courier New",Courier,monospace;
+
+  --t-xs:.75rem; --t-sm:.875rem; --t-md:1rem; --t-lg:1.125rem; --t-xl:1.375rem;
+
+  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='2 0 0 0 -.5 2 0 0 0 -.5 2 0 0 0 -.5 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --specks:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='s' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.5' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -16 0 0 0 4.0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
+  --wear:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='w' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 14 0 0 0 -2.95'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121116; --sheet:#1C1B21; --ink:#EDECE6; --ink-soft:#A7A5AE;
+    --pink:#FF5CBA; --yellow:#FFE631; --blue:#5AAEF5;
+    --on-ink:#121116; --on-acc:#121116;
+    --film:#050507; --film-frame:#2A2930; --film-hole:#121116; --film-mark:#FFB23F;
+    --tape:rgba(255,255,255,.16);
+    --plate-blend:screen; --grain-blend:screen; --grain-op:.09; --speck-op:.35; --speck-filter:invert(1);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121116; --sheet:#1C1B21; --ink:#EDECE6; --ink-soft:#A7A5AE;
+  --pink:#FF5CBA; --yellow:#FFE631; --blue:#5AAEF5;
+  --on-ink:#121116; --on-acc:#121116;
+  --film:#050507; --film-frame:#2A2930; --film-hole:#121116; --film-mark:#FFB23F;
+  --tape:rgba(255,255,255,.16);
+  --plate-blend:screen; --grain-blend:screen; --grain-op:.09; --speck-op:.35; --speck-filter:invert(1);
+  color-scheme:dark;
+}
+[data-ink="light"]{--acc:var(--yellow)}
+[data-ink="tender"]{--acc:var(--pink)}
+[data-ink="deep"]{--acc:var(--blue)}
+
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[hidden]{display:none!important}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.45;overflow-x:clip}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* print texture over everything */
+.grain,.specks{position:fixed;inset:0;pointer-events:none;z-index:40}
+.grain{background-image:var(--grain);background-size:240px;mix-blend-mode:var(--grain-blend);opacity:var(--grain-op)}
+.specks{background-image:var(--specks);background-size:420px;opacity:var(--speck-op);filter:var(--speck-filter)}
+
+.label{font-family:var(--f-type);font-size:var(--t-sm);letter-spacing:.03em;color:var(--ink-soft)}
+.wrap{max-width:52rem;margin:0 auto;padding-inline:16px;padding-block:clamp(18px,4vw,44px) 40px}
+@media (min-width:720px){.wrap{padding-inline:32px}}
+
+/* masthead */
+.mast{position:relative;isolation:isolate;display:grid;gap:.6rem;padding-block-end:clamp(16px,3vw,26px)}
+.mast::before{content:"";position:absolute;z-index:-1;right:0;top:-4%;width:clamp(150px,36vw,320px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle,var(--pink) 0 42%,transparent 46%) 0 0/9px 9px;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0 40%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 0 40%,transparent 70%)}
+.mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.4rem 1rem}
+.logo{margin:.2rem 0 0;display:grid;font-family:var(--f-display);font-weight:400;text-transform:uppercase;
+  font-size:clamp(3rem,15vw,7.2rem);line-height:.88;letter-spacing:-.005em;filter:url(#rough-lg)}
+.logo .plate{grid-area:1/1;-webkit-mask-image:var(--wear);mask-image:var(--wear);-webkit-mask-size:260px;mask-size:260px}
+.logo .plate-acc{color:var(--pink);mix-blend-mode:var(--plate-blend);transform:translate(.05em,.04em);animation:register .9s cubic-bezier(.2,.8,.2,1) both}
+.logo .plate-blue{color:var(--blue);mix-blend-mode:var(--plate-blend);transform:translate(-.035em,.05em);animation:register2 1.1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes register{from{transform:translate(.16em,-.06em)}to{transform:translate(.05em,.04em)}}
+@keyframes register2{from{transform:translate(-.12em,.14em)}to{transform:translate(-.035em,.05em)}}
+.cam{flex:none;width:clamp(84px,20vw,170px);height:auto;transform:rotate(-6deg);margin-top:-.4rem}
+.cam .k{fill:none;stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
+.cam .f-sheet{fill:var(--sheet)}
+.cam .f-ink{fill:var(--ink)}
+.cam .f-paper{fill:var(--paper)}
+.cam .p-y{fill:var(--yellow);mix-blend-mode:var(--plate-blend)}
+.cam .p-b{fill:var(--blue);mix-blend-mode:var(--plate-blend)}
+.cam .p-p{fill:var(--pink);mix-blend-mode:var(--plate-blend)}
+.cam text{font-family:var(--f-body);font-weight:800;font-size:11px;fill:var(--ink);font-variant-numeric:tabular-nums}
+.mast-row{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.mast-sub{margin:.2rem 0 0;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;min-width:0}
+.mast-sub .label{color:var(--ink)}
+.lede{margin:.7rem 0 0;max-width:38rem;font-family:var(--f-type);font-size:clamp(1.3rem,5vw,1.75rem);line-height:1.25}
+
+/* envelope + rules */
+.intro{display:grid;gap:clamp(18px,3vw,26px);grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));align-items:start;margin-top:clamp(10px,2vw,18px)}
+.envelope{position:relative;color:var(--on-acc);background:var(--yellow);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);
+  padding:clamp(48px,7vw,58px) clamp(14px,3vw,24px) clamp(16px,3vw,22px);transform:rotate(-.6deg)}
+.envelope::before{content:"";position:absolute;inset:0 0 auto 0;height:34px;border-bottom:2px dashed color-mix(in srgb,var(--on-acc) 55%,transparent);
+  background:radial-gradient(circle,color-mix(in srgb,var(--on-acc) 22%,transparent) 1px,transparent 1.6px) 0 0/6px 6px}
+.env-head{position:absolute;top:8px;left:14px;right:14px;display:flex;justify-content:space-between;gap:.5rem;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase}
+.env-title{margin:0 0 .8rem;font-family:var(--f-display);font-weight:400;font-size:clamp(1.3rem,4.6vw,1.75rem);line-height:1;text-transform:uppercase}
+.env-grid{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.55rem .8rem;align-items:baseline;margin:0}
+.env-grid dt{font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.env-grid dd{margin:0;font-weight:700;min-width:0}
+.env-input{width:100%;min-width:0;border:0;border-bottom:2px solid var(--on-acc);background:transparent;color:var(--on-acc);padding:.15rem 0;font-weight:700;font-size:var(--t-md);border-radius:0}
+.env-input::placeholder{color:color-mix(in srgb,var(--on-acc) 55%,transparent);opacity:1;font-weight:500}
+.env-input:focus-visible{outline:3px solid var(--on-acc);outline-offset:2px}
+.env-pair{display:flex;flex-wrap:wrap;gap:.2rem 1.2rem}
+.env-foot{margin:1rem 0 0;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.03em}
+.rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(20px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px)}
+.rules::before{content:"";position:absolute;top:-13px;left:50%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
+  clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
+.rules h2{margin:0 0 .7rem;font-family:var(--f-display);font-weight:400;font-size:clamp(1.3rem,4.6vw,1.75rem);line-height:1;text-shadow:.05em .045em 0 var(--blue)}
+.rules ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.rules li{display:grid;grid-template-columns:.8rem minmax(0,1fr);gap:.6rem;align-items:baseline}
+.rules li::before{content:"";width:.7rem;height:.7rem;background:var(--yellow);border:1.5px solid var(--ink);translate:0 .1rem}
+.rules li:nth-child(3n+2)::before{background:var(--pink)}
+.rules li:nth-child(3n)::before{background:var(--blue)}
+.start-row{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center;margin-top:clamp(18px,3vw,26px)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;cursor:pointer;white-space:nowrap;
+  font-family:var(--f-body);font-weight:800;font-stretch:112%;font-size:var(--t-sm);text-transform:uppercase;letter-spacing:.06em;
+  border:2px solid var(--ink);background:var(--sheet);color:var(--ink);padding:.7rem 1rem;box-shadow:3px 3px 0 var(--ink);
+  transition:transform .08s ease,box-shadow .08s ease,background .12s ease}
+.btn:hover{background:color-mix(in srgb,var(--acc) 25%,var(--sheet))}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn:disabled{opacity:.3;cursor:default;box-shadow:none;transform:none;background:var(--sheet)}
+.btn-acc{background:var(--acc);color:var(--on-acc)}
+.btn-acc:hover{background:var(--acc);filter:saturate(1.15) brightness(1.03)}
+.btn-ink{background:var(--ink);color:var(--on-ink);box-shadow:3px 3px 0 var(--acc)}
+.btn-ink:hover{background:var(--ink)}
+.btn-sm{padding:.45rem .7rem;font-size:var(--t-xs);box-shadow:2px 2px 0 var(--ink)}
+.btn-sm:active{transform:translate(2px,2px)}
+.btn-big{padding:.9rem 1.3rem;font-size:var(--t-md)}
+.linkish{background:none;border:0;padding:.2rem 0;cursor:pointer;font-weight:700;font-size:var(--t-sm);text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--acc);text-underline-offset:4px}
+
+/* sticky counter bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--paper);border-block:2px solid var(--ink);margin-top:clamp(26px,5vw,44px)}
+.bar-in{max-width:52rem;margin:0 auto;padding-inline:16px;padding-block:.5rem;display:flex;align-items:center;gap:.7rem}
+@media (min-width:720px){.bar-in{padding-inline:32px}}
+.count{display:flex;align-items:center;gap:.5rem;flex:none}
+.count-win{width:2.8rem;height:2.8rem;border-radius:50%;display:grid;place-items:center;border:2.5px solid var(--ink);background:var(--sheet);
+  font-family:var(--f-body);font-weight:800;font-size:1.3rem;line-height:1;font-variant-numeric:tabular-nums;box-shadow:inset 0 0 0 3px var(--paper),inset 0 0 0 4.5px var(--ink)}
+.count-win.tick{animation:tick .35s ease-out}
+@keyframes tick{0%{transform:rotate(-40deg)}100%{transform:none}}
+.count-label{font-family:var(--f-type);font-size:var(--t-xs);line-height:1.15;letter-spacing:.03em}
+.strip{position:relative;flex:1;min-width:0;display:grid;grid-template-columns:repeat(27,minmax(0,1fr));gap:2px;padding:8px 3px;background:var(--film)}
+.strip::before,.strip::after{content:"";position:absolute;left:3px;right:3px;height:3px;background:repeating-linear-gradient(90deg,var(--film-hole) 0 4px,transparent 4px 9px)}
+.strip::before{top:2px}
+.strip::after{bottom:2px}
+.cell{height:13px;background:var(--film-frame);opacity:.35}
+.cell.is-shot{opacity:1;background:var(--acc)}
+.cell.is-cur{opacity:1;outline:2px solid var(--film-mark);outline-offset:1px;position:relative;z-index:1}
+.icon-btn{flex:none;width:42px;height:42px;display:inline-grid;place-items:center;padding:0;cursor:pointer;border:2px solid var(--ink);background:var(--sheet);color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.icon-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+/* view tabs */
+.book{scroll-margin-top:84px;margin-top:clamp(18px,3vw,26px)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap}
+.tab{cursor:pointer;padding:.55rem .9rem;border:2px solid var(--ink);background:var(--sheet);font-family:var(--f-display);font-size:clamp(.9rem,3.4vw,1.1rem);line-height:1;
+  transition:transform .12s ease,box-shadow .12s ease}
+.tab:hover{background:color-mix(in srgb,var(--yellow) 30%,var(--sheet))}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--on-ink);box-shadow:4px 4px 0 var(--yellow);transform:translate(-2px,-2px)}
+
+/* the frame sheet */
+.sheet{position:relative;margin-top:clamp(20px,3.4vw,28px);background:var(--sheet);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--acc);
+  padding-inline:clamp(14px,3.6vw,36px);padding-block:clamp(24px,3.6vw,34px) clamp(16px,3vw,26px)}
+.sheet::before,.sheet::after{content:"";position:absolute;top:-13px;width:clamp(70px,14vw,104px);height:26px;background:var(--tape);
+  clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
+.sheet::before{left:22px;transform:rotate(-4deg)}
+.sheet::after{right:26px;transform:rotate(3.5deg)}
+.sheet.flip{animation:flip .32s ease-out}
+@keyframes flip{from{transform:translateY(8px) rotate(.5deg);opacity:.4}}
+.reg{position:absolute;right:10px;bottom:10px;width:22px;height:22px;color:var(--ink);opacity:.5}
+.sheet-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.3rem 1rem}
+.sheet-top .label:first-child{color:var(--ink)}
+.f-title{margin:.7rem 0 0;font-family:var(--f-display);font-weight:400;text-transform:uppercase;font-size:clamp(1.85rem,7.4vw,3.3rem);line-height:.98;
+  text-shadow:.05em .045em 0 var(--acc);text-wrap:balance;overflow-wrap:anywhere}
+.f-roman{display:block;font-size:.5em;letter-spacing:.04em;margin-bottom:.25rem}
+.f-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .8rem;margin-top:.9rem}
+.sticker{display:inline-block;padding:.15rem .5rem;white-space:nowrap;font-family:var(--f-type);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--acc);color:var(--on-acc);border:1.5px solid var(--ink);transform:rotate(-3deg)}
+.steps{display:grid;gap:1rem;margin-top:1.3rem;transition:opacity .2s ease}
+.steps.is-swapped{opacity:.4}
+.step{display:grid;gap:.25rem;min-width:0}
+.step-k{justify-self:start;font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.step-t{margin:0;max-width:40rem;overflow-wrap:anywhere}
+.step[data-k="shoot"] .step-k{color:var(--on-acc);background:var(--acc);border:1.5px solid var(--ink);padding:.05rem .4rem}
+.step[data-k="shoot"] .step-t{font-size:clamp(1.15rem,4.2vw,1.4rem);font-weight:650;line-height:1.35}
+.step[data-k="ask"] .step-t{font-family:var(--f-type);font-size:clamp(1.05rem,3.8vw,1.2rem);line-height:1.4}
+.step[data-k="ask"] .step-t::before{content:"\201C"}
+.step[data-k="ask"] .step-t::after{content:"\201D"}
+.step[data-k="first"] .step-t,.step[data-k="then"] .step-t{font-size:var(--t-lg)}
+.step[data-k="tip"]{grid-template-columns:auto minmax(0,1fr);align-items:start;column-gap:.5rem;padding:.6rem .7rem;border:1.5px dashed color-mix(in srgb,var(--ink) 50%,transparent)}
+.step[data-k="tip"] .step-k{grid-column:1/-1}
+.step[data-k="tip"] .step-t{font-size:var(--t-sm);color:var(--ink-soft)}
+.spare{position:relative;margin-top:1.2rem;padding:1rem;border:2px solid var(--ink);background:color-mix(in srgb,var(--yellow) 30%,var(--sheet));display:grid;gap:.35rem}
+.spare-k{font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.1em;text-transform:uppercase}
+.spare-title{margin:0;font-family:var(--f-display);font-weight:400;font-size:clamp(1.15rem,4.4vw,1.5rem);line-height:1.05;text-transform:uppercase}
+.spare-text{margin:0;font-size:var(--t-lg);font-weight:600;max-width:40rem}
+.spare-acts{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:.3rem}
+.perf{height:10px;margin-block:1.4rem .9rem;background:radial-gradient(circle at 5px 5px,var(--paper) 0 3.2px,transparent 3.8px) 0 0/15px 10px repeat-x}
+.field{display:grid;gap:.3rem}
+.field-label{font-family:var(--f-type);font-size:var(--t-xs);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+.input{min-width:0;width:100%;border:2px solid var(--ink);border-radius:0;background:var(--paper);color:var(--ink);padding:.65rem .75rem;font-size:16px;line-height:1.4;resize:vertical}
+.input::placeholder{color:var(--ink-soft);opacity:1}
+.f-acts{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem 1rem;margin-top:1rem}
+.f-nav{display:flex;justify-content:space-between;gap:.7rem;margin-top:1.4rem;padding-top:1rem;border-top:2px dotted color-mix(in srgb,var(--ink) 40%,transparent)}
+.stamp{display:inline-block;margin-left:auto;padding:.25rem .7rem;font-family:var(--f-display);font-size:clamp(1rem,3.6vw,1.35rem);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);border:3px solid currentColor;outline:1.5px solid currentColor;outline-offset:3px;transform:rotate(-9deg);opacity:.85;filter:url(#rough);
+  -webkit-mask-image:var(--wear);mask-image:var(--wear);-webkit-mask-size:200px;mask-size:200px;pointer-events:none}
+.stamp.slam{animation:slam .3s cubic-bezier(.3,1.6,.5,1)}
+@keyframes slam{from{transform:rotate(-14deg) scale(1.6);opacity:0}}
+
+/* contact sheet */
+.contact{margin-top:clamp(20px,3.4vw,28px);background:var(--film);padding:12px 22px;position:relative;border:2px solid var(--ink)}
+.contact::before,.contact::after{content:"";position:absolute;top:10px;bottom:10px;width:8px;background:repeating-linear-gradient(180deg,var(--film-hole) 0 7px,transparent 7px 16px)}
+.contact::before{left:7px}
+.contact::after{right:7px}
+.contact-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px}
+@media (min-width:640px){.contact-grid{grid-template-columns:repeat(7,minmax(0,1fr))}}
+.ct{display:grid;gap:3px;min-width:0}
+.ct-mark{font-family:var(--f-type);font-size:.68rem;color:var(--film-mark);letter-spacing:.04em;white-space:nowrap}
+.ct-btn{position:relative;display:grid;align-content:space-between;gap:.3rem;min-height:5.4rem;padding:.4rem .4rem .45rem;text-align:left;cursor:pointer;
+  border:0;background:var(--film-frame);color:var(--ink);box-shadow:inset 0 -5px 0 var(--acc)}
+.ct-btn:hover{filter:brightness(1.06)}
+.ct-btn:focus-visible{outline-color:var(--film-mark)}
+.ct-n{font-family:var(--f-display);font-size:1.35rem;line-height:1}
+.ct-t{font-size:.7rem;font-weight:700;font-stretch:82%;line-height:1.15;overflow-wrap:anywhere}
+.ct.is-shot .ct-btn{background:var(--acc);color:var(--on-acc);box-shadow:none}
+.ct.is-shot .ct-n::after{content:" \2713";font-family:var(--f-body);font-size:.85rem;vertical-align:.2em}
+.ct.is-cur .ct-btn{outline:3px solid var(--film-mark);outline-offset:2px}
+.ct-end .ct-btn{background:transparent;color:var(--film-mark);border:2px dashed var(--film-mark);box-shadow:none}
+.contact-foot{margin:.9rem 0 0;color:var(--film-mark);font-family:var(--f-type);font-size:var(--t-xs)}
+
+/* the end */
+.ransom{display:flex;flex-wrap:wrap;gap:.3rem .9rem;margin:.4rem 0 0;font-size:clamp(2.1rem,9.5vw,3.9rem);line-height:1}
+.ransom .word{display:inline-flex;gap:.06em}
+.ransom .ch{display:inline-block;padding:.04em .09em .02em;border:1.5px solid var(--ink);text-transform:uppercase;min-width:.7em;text-align:center}
+.ch.r0{font-family:var(--f-display);background:var(--ink);color:var(--on-ink)}
+.ch.r1{font-family:var(--f-type);background:var(--sheet);color:var(--ink)}
+.ch.r2{font-family:var(--f-display);background:var(--blue);color:var(--on-acc)}
+.ch.r3{font-family:var(--f-body);font-weight:900;font-stretch:62%;background:var(--paper);color:var(--ink)}
+.ch.r4{font-family:var(--f-display);background:var(--pink);color:var(--on-acc)}
+.ch.r5{font-family:var(--f-type);background:var(--yellow);color:var(--on-acc)}
+.end-stats{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin-top:1rem}
+.end-stats .label{color:var(--ink)}
+.end-body{display:grid;gap:.8rem;margin-top:1rem;max-width:40rem;font-size:var(--t-lg)}
+.end-body p{margin:0}
+.copy-box{margin-top:.8rem}
+.copy-box textarea{font-family:var(--f-type);font-size:var(--t-sm)}
+
+/* footer */
+.foot{display:grid;gap:.8rem;margin-top:clamp(26px,4vw,40px)}
+.foot p{margin:0;max-width:44rem}
+.inks{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem}
+.inks span{display:inline-flex;align-items:center;gap:.45rem;font-family:var(--f-type);font-size:var(--t-xs);color:var(--ink-soft)}
+.inks i{width:1.6rem;height:.8rem;background:var(--acc);border:1.5px solid var(--ink)}
+
+/* toast */
+.toast{position:fixed;z-index:60;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));translate:-50% 0;width:max-content;max-width:calc(100% - 32px);
+  display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;background:var(--ink);color:var(--on-ink);box-shadow:5px 5px 0 var(--acc);font-weight:600}
+.toast.show{animation:pop .25s ease-out}
+@keyframes pop{from{transform:translateY(10px);opacity:0}}
+.toast button{flex:none;background:none;border:0;padding:.2rem 0;cursor:pointer;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:inherit;
+  text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--acc);text-underline-offset:4px}
+.toast button:focus-visible{outline-color:var(--on-ink)}
+
+@media (max-width:520px){
+  .count-label{display:none}
+  .f-nav .btn{padding-inline:.8rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg class="defs" aria-hidden="true" focusable="false">
+  <filter id="rough" x="-4%" y="-10%" width="108%" height="120%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="2" seed="4" result="t"/>
+    <feDisplacementMap in="SourceGraphic" in2="t" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="rough-lg" x="-3%" y="-6%" width="106%" height="112%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".04" numOctaves="3" seed="2" result="w"/>
+    <feDisplacementMap in="SourceGraphic" in2="w" scale="5" xChannelSelector="R" yChannelSelector="G" result="d"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="1" seed="8" result="f"/>
+    <feDisplacementMap in="d" in2="f" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+<div class="grain" aria-hidden="true"></div>
+<div class="specks" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="mast">
+    <div class="mast-top">
+      <span class="label">Vol. 2 · One roll, one night walk</span>
+      <span class="label">Shot on a disposable</span>
+    </div>
+    <h1 class="logo"><span class="plate">Night<br>Roll</span><span class="plate plate-blue" aria-hidden="true">Night<br>Roll</span><span class="plate plate-acc" aria-hidden="true">Night<br>Roll</span></h1>
+    <div class="mast-row">
+  <p class="mast-sub"><span class="label">27 frames</span><span class="label">3 parts</span><span class="label">0 retakes</span></p>
+      <svg class="cam" viewBox="0 0 200 128" role="img" aria-label="A disposable camera">
+        <rect class="p-b" x="15" y="25" width="180" height="24"/>
+        <rect class="p-y" x="16" y="52" width="178" height="62" rx="4"/>
+        <rect class="p-p" x="28" y="58" width="44" height="26"/>
+        <rect class="f-sheet" x="10" y="20" width="180" height="92" rx="8"/>
+        <rect class="p-b" x="10" y="20" width="180" height="24" rx="8"/>
+        <rect class="p-y" x="13" y="49" width="174" height="60"/>
+        <rect class="k" x="10" y="20" width="180" height="92" rx="8"/>
+        <path class="k" d="M10 44h180"/>
+        <rect class="k" x="26" y="11" width="24" height="9"/>
+        <rect class="f-sheet" x="148" y="6" width="34" height="14"/>
+        <path class="k" d="M148 6h34v14h-34zM154 6v14M160 6v14M166 6v14M172 6v14M178 6v14"/>
+        <rect class="f-sheet" x="24" y="54" width="44" height="26"/>
+        <rect class="p-p" x="24" y="54" width="44" height="26"/>
+        <rect class="k" x="24" y="54" width="44" height="26"/>
+        <path class="k" d="M30 61h32M30 67h32M30 73h32" style="stroke-width:1.5"/>
+        <rect class="f-sheet" x="152" y="54" width="22" height="14"/>
+        <rect class="k" x="152" y="54" width="22" height="14"/>
+        <circle class="f-ink" cx="118" cy="80" r="25"/>
+        <circle class="p-b" cx="121" cy="77" r="15"/>
+        <circle class="f-paper" cx="118" cy="80" r="13"/>
+        <circle class="f-ink" cx="118" cy="80" r="7"/>
+        <circle class="f-sheet" cx="114" cy="76" r="2.4"/>
+        <circle class="f-sheet" cx="96" cy="32" r="9"/>
+        <circle class="k" cx="96" cy="32" r="9" style="stroke-width:2.5"/>
+        <text id="cam-count" x="96" y="36" text-anchor="middle">27</text>
+      </svg>
+    </div>
+    <p class="lede">let's take some random ass pics &lt;3</p>
+  </header>
+
+  <section class="intro" aria-label="Before you start">
+    <div class="envelope">
+      <div class="env-head" aria-hidden="true"><span>Photo lab · order envelope</span><span>Roll No. 001</span></div>
+      <h2 class="env-title">Order envelope</h2>
+      <dl class="env-grid">
+        <dt>Name</dt>
+        <dd>us &lt;3</dd>
+        <dt>Date</dt>
+        <dd id="env-date">Tonight</dd>
+        <dt>Film</dt>
+        <dd class="env-pair"><span>27 exp.</span><span>Process C-41</span></dd>
+        <dt>Order</dt>
+        <dd>Develop · 1 set of prints · 1 new line on the list</dd>
+      </dl>
+    </div>
+
+    <div class="rules">
+      <h2>House rules</h2>
+      <ul>
+        <li>One camera, one walk through the city, 27 frames. No retakes and no peeking.</li>
+        <li>Every frame is something to find on the way. Find it together, agree, shoot.</li>
+        <li>Flash on for anything within three steps. For lit signs and windows further away, flash off and hold very still.</li>
+        <li>Wind the wheel until it stops after every shot.</li>
+        <li>Skip anything, or deal a spare.</li>
+        <li>A line in each frame's note helps you match the prints later.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="start-row">
+    <button class="btn btn-big btn-ink" type="button" id="start">Load the camera</button>
+    <span class="label" id="resume-line"></span>
+  </div>
+</div>
+
+<div class="bar" id="bar">
+  <div class="bar-in">
+    <div class="count" aria-live="polite">
+      <span class="count-win" id="count">27</span>
+      <span class="count-label">frames<br>left</span>
+      <span class="sr" id="count-sr">27 frames left</span>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <button class="icon-btn" type="button" id="lights" aria-label="Lights down" title="Lights down"></button>
+  </div>
+</div>
+
+<div class="wrap" style="padding-block-start:0">
+  <section class="book" id="book" aria-label="The roll">
+    <div class="tabs" role="tablist" aria-label="View">
+      <button class="tab" type="button" role="tab" id="tab-frame" aria-controls="frame-panel" aria-selected="true">One frame</button>
+      <button class="tab" type="button" role="tab" id="tab-sheet" aria-controls="sheet-panel" aria-selected="false" tabindex="-1">Contact sheet</button>
+    </div>
+
+    <article class="sheet" id="frame-panel" role="tabpanel" aria-labelledby="tab-frame" data-ink="tender">
+      <svg class="reg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 0v24M0 12h24" stroke="currentColor" stroke-width="1.5"/></svg>
+      <div class="sheet-top">
+        <span class="label" id="f-num">Frame 01 / 27</span>
+        <span class="label" id="f-part">Part one · Opening credits</span>
+      </div>
+      <h2 class="f-title"><span class="f-roman" id="f-roman">I.</span><span id="f-title">The before picture</span></h2>
+      <div class="f-tags">
+        <span class="sticker" id="f-ink">Tender</span>
+      </div>
+      <div class="spare" id="f-spare" hidden>
+        <span class="spare-k">Spare frame, in place of this one</span>
+        <p class="spare-title" id="spare-title"></p>
+        <p class="spare-text" id="spare-text"></p>
+        <div class="spare-acts">
+          <button class="linkish" type="button" id="spare-next">Deal another spare</button>
+          <button class="linkish" type="button" id="spare-drop">Go back to the original</button>
+        </div>
+      </div>
+      <div class="steps" id="f-steps"></div>
+      <div class="perf" aria-hidden="true"></div>
+      <label class="field" for="f-note">
+        <span class="field-label">Note for the print</span>
+        <textarea class="input" id="f-note" rows="2" maxlength="300" placeholder="What happened, so you can match the print later"></textarea>
+      </label>
+      <div class="f-acts">
+        <button class="btn btn-big btn-acc" type="button" id="f-shot">Shot it</button>
+        <button class="btn btn-sm" type="button" id="f-spare-btn">Deal a spare</button>
+        <span class="stamp" id="f-stamp" hidden>Exposed</span>
+      </div>
+      <div class="f-nav">
+        <button class="btn" type="button" id="prev" aria-label="Previous frame">&larr; Back</button>
+        <button class="btn" type="button" id="next">Next frame &rarr;</button>
+      </div>
+    </article>
+
+    <div id="sheet-panel" role="tabpanel" aria-labelledby="tab-sheet" hidden>
+      <div class="contact">
+        <ol class="contact-grid" id="contact"></ol>
+        <p class="contact-foot">Tap a frame to open it. Coloured frames are exposed.</p>
+      </div>
+    </div>
+
+    <article class="sheet" id="end-panel" data-ink="deep" hidden>
+      <svg class="reg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 0v24M0 12h24" stroke="currentColor" stroke-width="1.5"/></svg>
+      <div class="sheet-top"><span class="label">End of roll</span><span class="label" id="end-date"></span></div>
+      <h2 class="ransom" id="ransom" aria-label="That's the roll"></h2>
+      <div class="end-stats" id="end-stats"></div>
+      <div class="end-body">
+        <p>Drop the camera at a photo lab and leave the envelope shut. When the prints come back, open them together.</p>
+        <p>Put that on the list. Log tonight on Letterboxd: title, stars, one line. Then go to sleep before five, as promised.</p>
+      </div>
+      <div class="f-acts">
+        <button class="btn btn-acc" type="button" id="copy">Copy our notes</button>
+        <button class="btn btn-sm" type="button" id="back-roll">Back to the roll</button>
+      </div>
+      <div class="copy-box" id="copy-box" hidden>
+        <label class="field" for="copy-text"><span class="field-label">Your notes, selected. Copy them from here.</span>
+          <textarea class="input" id="copy-text" rows="8" readonly></textarea></label>
+      </div>
+      <div class="f-nav">
+        <button class="linkish" type="button" id="reset">Start a new roll</button>
+      </div>
+    </article>
+  </section>
+
+  <footer class="foot">
+    <div class="inks" aria-hidden="true">
+      <span data-ink="light"><i></i>Yellow · light</span>
+      <span data-ink="tender"><i></i>Pink · tender</span>
+      <span data-ink="deep"><i></i>Blue · deep</span>
+    </div>
+    <p class="label">Ticks and notes are saved on this device only. Nothing is sent anywhere.</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden><span id="toast-msg"></span><button type="button" id="toast-act" hidden></button></div>
+
+<script>
+(() => {
+  "use strict";
+
+  // Steps are [kind, text], shown in order. Every frame is something to find and shoot together on the walk.
+  const FRAMES = [
+    { t: "Opening shot", ink: "light", s: [
+      ["shoot", "The very first thing you see when you step outside. No choosing, no second thoughts."],
+      ["then", "Every film needs an opening shot. This is ours."]] },
+    { t: "Lost and found", ink: "deep", s: [
+      ["shoot", "Something someone lost that a stranger put up on a fence, a railing or a windowsill, so it could be found."]] },
+    { t: "A sign from the universe", ink: "light", s: [
+      ["shoot", "A sign, sticker or poster that answers a question one of you asked tonight."]] },
+    { t: "Main character", ink: "light", s: [
+      ["shoot", "The main character of this street: a pigeon, a cat, a very confident rat. Get close and give them their moment."],
+      ["tip", "Flash on, two steps away at most."]] },
+    { t: "Still waiting", ink: "tender", s: [
+      ["shoot", "A bike that has clearly been waiting for its person for a very long time."]] },
+    { t: "Word of the night", ink: "light", s: [
+      ["shoot", "One word written somewhere on the street that sums up tonight so far. You both have to agree on it."]] },
+    { t: "Directed by a stranger: take one", ink: "light", s: [
+      ["shoot", "Hand the camera to a stranger. They direct a photo of one of you: the spot, the pose, the face. The director's word is final."],
+      ["tip", "Show them the button, and tell them to wait for the flash light."]] },
+    { t: "Directed by a stranger: take two", ink: "light", s: [
+      ["shoot", "Same stranger or a new one. Now the other one of you, same rules. No complaints about the vision."]] },
+    { t: "Straight onto the list", ink: "tender", s: [
+      ["shoot", "The first thing tonight that deserves a place on the list."],
+      ["ask", "Films, dishes or together?"],
+      ["then", "If it's empanadas, it's already on there three times."]] },
+
+    { t: "A light left on", ink: "deep", s: [
+      ["shoot", "One lit window in a dark building. A whole life is going on in there that you will never know about."],
+      ["tip", "Flash off. Lean on something and hold your breath."]] },
+    { t: "The beautiful ugly thing", ink: "deep", s: [
+      ["shoot", "The most beautiful ugly thing on this street: a crack, a stain, a tired wall. Shoot it like it hangs in a museum."]] },
+    { t: "Gone by morning", ink: "deep", s: [
+      ["shoot", "Something that won't be here tomorrow: a puddle, a chalk drawing, a crowd outside a bar, a snack someone left on a wall."]] },
+    { t: "Practical effects", ink: "light", s: [
+      ["shoot", "The creepiest thing on this walk, shot like the poster for a horror film."],
+      ["tip", "From below, one step away, flash on. Let the shadows do the work."]] },
+    { t: "A door you'll never open", ink: "deep", s: [
+      ["shoot", "A door neither of you will ever walk through."],
+      ["ask", "What's behind it? One guess each."]] },
+    { t: "A lie the print will tell", ink: "light", s: [
+      ["shoot", "Stage a photo that will make no sense to anyone who finds the print. Agree on the cover story now."]] },
+    { t: "Con todo, sino pa' qué", ink: "light", s: [
+      ["first", "Say yes to the next harmless thing the night offers: a detour, a free sample, a street you've never taken."],
+      ["shoot", "Photograph the yes."],
+      ["then", "Wie niet waagt, wie niet wint."]] },
+    { t: "Two of a kind", ink: "tender", s: [
+      ["shoot", "Two things side by side that clearly belong together, even if nobody planned it."]] },
+    { t: "Not where I'm from", ink: "deep", s: [
+      ["shoot", "Something on this street that wouldn't exist where either of you grew up."],
+      ["ask", "What would be there instead?"]] },
+
+    { t: "The city upside down", ink: "deep", s: [
+      ["shoot", "Water at night: the river, a canal, a puddle. Photograph what it's reflecting."],
+      ["tip", "Flash off, or it only sees the water."]] },
+    { t: "Almost touching", ink: "tender", s: [
+      ["shoot", "Two things that are almost touching but not quite: two branches, two bikes, a tram and its wire."]] },
+    { t: "A bench for later", ink: "tender", s: [
+      ["shoot", "The bench you would come back to in ten years, just to see if it's still there."]] },
+    { t: "Still open", ink: "tender", s: [
+      ["shoot", "The last place still open on this street. Somebody is keeping the lights on for people like you two."]] },
+    { t: "A heart that isn't trying", ink: "tender", s: [
+      ["shoot", "A heart shape that happened by accident: a stain, a leaf, a cracked tile. If it's on purpose, it doesn't count."]] },
+    { t: "The quiet minute", ink: "deep", s: [
+      ["first", "Stop walking. One minute, and nobody talks."],
+      ["shoot", "When the minute is up, photograph whatever you were both looking at."]] },
+    { t: "Look up", ink: "deep", s: [
+      ["shoot", "The highest thing you can see from here: a crane, a rooftop, the moon if it's out."],
+      ["tip", "Flash off. Rest the camera on something and hold your breath."]] },
+    { t: "Both of us, roughly", ink: "tender", s: [
+      ["shoot", "Turn the camera around and hold it at arm's length. No viewfinder, no countdown, one go. Both of you, roughly in frame."],
+      ["tip", "Lens facing you, flash on, thumb on the button."]] },
+    { t: "The final frame", ink: "tender", s: [
+      ["shoot", "The last photo on this camera. Whatever you would want to see first when the prints come back."]] }
+  ];
+
+  const SPARES = [
+    ["The reddest thing", "The reddest thing on this street, as close as the camera allows."],
+    ["Up close", "Something you would normally walk straight past, from one step away."],
+    ["Neon", "A lit sign or shop window. Flash off, and hold very still."],
+    ["Lamppost archive", "The strangest sticker on a lamppost or a pole."],
+    ["Our shoes", "Both your shoes, on the most interesting ground you've crossed tonight."],
+    ["Proof of date", "Anything with today's date on it: a receipt, a ticket, a poster."]
+  ];
+
+  const PARTS = [
+    { to: 9, name: "Part one", sub: "Leaving the bar" },
+    { to: 18, name: "Part two", sub: "Lost on purpose" },
+    { to: 27, name: "Part three", sub: "The long way home" }
+  ];
+  const INK_NAME = { light: "Light", tender: "Tender", deep: "Deep" };
+  const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask", then: "Then", tip: "Camera tip" };
+  const N = FRAMES.length;
+  const LS = "night-roll:v1";
+  const LS_THEME = "night-roll:theme";
+
+  const ICON_MOON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg>';
+  const ICON_SUN = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="currentColor" stroke-width="2.3" stroke-linecap="square"/></svg>';
+
+  const $ = s => document.querySelector(s);
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+  const pad = n => String(n).padStart(2, "0");
+  const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function roman(n) {
+    const map = [[10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+    let out = "";
+    for (const [v, s] of map) while (n >= v) { out += s; n -= v; }
+    return out;
+  }
+
+  /* ---------- state (this device only) ---------- */
+
+  let st = { cur: 1, view: "frame", started: false, frames: {} };
+  try {
+    const raw = JSON.parse(localStorage.getItem(LS) || "null");
+    if (raw && typeof raw === "object") {
+      if (Number.isInteger(raw.cur) && raw.cur >= 1 && raw.cur <= N) st.cur = raw.cur;
+      if (["frame", "sheet", "end"].includes(raw.view)) st.view = raw.view;
+      st.started = raw.started === true;
+      if (raw.frames && typeof raw.frames === "object") {
+        for (let i = 1; i <= N; i++) {
+          const f = raw.frames[i];
+          if (!f) continue;
+          st.frames[i] = {
+            shot: f.shot === true,
+            note: typeof f.note === "string" ? f.note.slice(0, 300) : "",
+            spare: Number.isInteger(f.spare) && f.spare >= 0 && f.spare < SPARES.length ? f.spare : null
+          };
+        }
+      }
+    }
+  } catch {}
+  let saveTimer = null;
+  function save() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(() => { try { localStorage.setItem(LS, JSON.stringify(st)); } catch {} }, 150);
+  }
+  const fr = n => st.frames[n] || { shot: false, note: "", spare: null };
+  const edit = n => (st.frames[n] = st.frames[n] || { shot: false, note: "", spare: null });
+  const shotCount = () => FRAMES.reduce((c, _, i) => c + (fr(i + 1).shot ? 1 : 0), 0);
+  const partOf = n => PARTS.find(p => n <= p.to);
+  /* ---------- theme ---------- */
+
+  const root = document.documentElement;
+  try { const t = localStorage.getItem(LS_THEME); if (t === "dark" || t === "light") root.dataset.theme = t; } catch {}
+  const isDark = () => root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  function paintLights() {
+    const b = $("#lights"), d = isDark();
+    b.innerHTML = d ? ICON_SUN : ICON_MOON;
+    const label = d ? "Lights up" : "Lights down";
+    b.setAttribute("aria-label", label);
+    b.title = label;
+  }
+  $("#lights").addEventListener("click", () => {
+    const next = isDark() ? "light" : "dark";
+    root.dataset.theme = next;
+    try { localStorage.setItem(LS_THEME, next); } catch {}
+    paintLights();
+  });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", paintLights);
+
+  /* ---------- toast ---------- */
+
+  let toastTimer = null;
+  function toast(msg, act, fn) {
+    const t = $("#toast"), b = $("#toast-act");
+    $("#toast-msg").textContent = msg;
+    b.hidden = !act;
+    b.textContent = act || "";
+    b.onclick = act ? () => { t.hidden = true; fn(); } : null;
+    t.hidden = false;
+    t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, act ? 5200 : 3200);
+  }
+
+  /* ---------- rendering ---------- */
+
+  function renderBar() {
+    const left = N - shotCount();
+    const c = $("#count");
+    if (c.textContent !== String(left)) {
+      c.textContent = left;
+      if (!reduced()) { c.classList.remove("tick"); void c.offsetWidth; c.classList.add("tick"); }
+    }
+    $("#count-sr").textContent = left + " frames left";
+    $("#cam-count").textContent = left;
+    const strip = $("#strip");
+    if (!strip.children.length) for (let i = 1; i <= N; i++) strip.append(el("span", "cell"));
+    [...strip.children].forEach((cell, i) => {
+      cell.dataset.ink = FRAMES[i].ink;
+      cell.classList.toggle("is-shot", fr(i + 1).shot);
+      cell.classList.toggle("is-cur", st.view !== "end" && i + 1 === st.cur);
+    });
+    const done = shotCount();
+    $("#resume-line").textContent = st.started && st.view !== "end"
+      ? `Roll in progress: frame ${pad(st.cur)}, ${done} shot.`
+      : done === N ? "Roll finished." : "";
+    $("#start").textContent = st.started ? "Back to the roll" : "Load the camera";
+  }
+
+  function renderFrame(animate) {
+    const n = st.cur, f = FRAMES[n - 1], s = fr(n), part = partOf(n);
+    const panel = $("#frame-panel");
+    panel.dataset.ink = f.ink;
+    panel.classList.toggle("is-shot", s.shot);
+    $("#f-num").textContent = `Frame ${pad(n)} / ${N}`;
+    $("#f-part").textContent = `${part.name} · ${part.sub}`;
+    $("#f-roman").textContent = roman(n) + ".";
+    $("#f-title").textContent = f.t;
+    $("#f-ink").textContent = INK_NAME[f.ink];
+
+    const steps = $("#f-steps");
+    steps.textContent = "";
+    for (const [k, t] of f.s) {
+      const d = el("div", "step");
+      d.dataset.k = k;
+      d.append(el("span", "step-k", STEP_NAME[k]), el("p", "step-t", t));
+      steps.append(d);
+    }
+    steps.classList.toggle("is-swapped", s.spare != null);
+
+    const sp = $("#f-spare");
+    sp.hidden = s.spare == null;
+    if (s.spare != null) {
+      $("#spare-title").textContent = SPARES[s.spare][0];
+      $("#spare-text").textContent = SPARES[s.spare][1];
+    }
+    $("#f-spare-btn").hidden = s.spare != null;
+
+
+    const note = $("#f-note");
+    if (document.activeElement !== note || animate) note.value = s.note;
+
+    const shot = $("#f-shot");
+    shot.textContent = s.shot ? "Exposed. Undo?" : "Shot it";
+    shot.classList.toggle("btn-acc", !s.shot);
+    shot.setAttribute("aria-pressed", String(s.shot));
+    $("#f-stamp").hidden = !s.shot;
+
+    $("#prev").disabled = n === 1;
+    $("#next").innerHTML = n === N ? "Finish the roll &rarr;" : "Next frame &rarr;";
+
+    if (animate && !reduced()) { panel.classList.remove("flip"); void panel.offsetWidth; panel.classList.add("flip"); }
+  }
+
+  function renderSheet() {
+    const ol = $("#contact");
+    ol.textContent = "";
+    FRAMES.forEach((f, i) => {
+      const n = i + 1, s = fr(n);
+      const li = el("li", "ct" + (s.shot ? " is-shot" : "") + (n === st.cur ? " is-cur" : ""));
+      li.dataset.ink = f.ink;
+      li.append(el("span", "ct-mark", `${n} ▸ ${n}A`));
+      const b = el("button", "ct-btn");
+      b.type = "button";
+      b.dataset.n = n;
+      b.setAttribute("aria-label", `Frame ${n}: ${f.t}${s.shot ? ", exposed" : ""}`);
+      b.append(el("span", "ct-n", pad(n)), el("span", "ct-t", s.spare != null ? SPARES[s.spare][0] : f.t));
+      li.append(b);
+      ol.append(li);
+    });
+    const end = el("li", "ct ct-end");
+    end.append(el("span", "ct-mark", "END ▸"));
+    const b = el("button", "ct-btn");
+    b.type = "button";
+    b.dataset.n = "end";
+    b.append(el("span", "ct-n", "End"), el("span", "ct-t", "That's the roll"));
+    end.append(b);
+    ol.append(end);
+  }
+
+  function buildRansom() {
+    const h = $("#ransom");
+    if (h.children.length) return;
+    const rot = [-4, 3, -2, 5, -6, 2, -3, 4, -1, 6, -5, 1];
+    let k = 0;
+    for (const word of ["That's", "the", "roll"]) {
+      const w = el("span", "word");
+      w.setAttribute("aria-hidden", "true");
+      for (const ch of word) {
+        const c = el("span", "ch r" + ((k * 7 + 3) % 6), ch);
+        c.style.transform = `rotate(${rot[k % rot.length]}deg)`;
+        w.append(c);
+        k++;
+      }
+      h.append(w);
+    }
+  }
+
+  function renderEnd() {
+    buildRansom();
+    const shot = shotCount();
+    const notes = FRAMES.filter((_, i) => fr(i + 1).note.trim()).length;
+    const stats = $("#end-stats");
+    stats.textContent = "";
+    stats.append(
+      el("span", "label", `${shot} of ${N} frames exposed`),
+      el("span", "label", `${N - shot} left for the walk to the lab`),
+      el("span", "label", `${notes} notes written`)
+    );
+  }
+
+  function render(animate) {
+    const v = st.view;
+    $("#tab-frame").setAttribute("aria-selected", String(v === "frame"));
+    $("#tab-sheet").setAttribute("aria-selected", String(v === "sheet"));
+    $("#tab-frame").tabIndex = v === "sheet" ? -1 : 0;
+    $("#tab-sheet").tabIndex = v === "sheet" ? 0 : -1;
+    $("#frame-panel").hidden = v !== "frame";
+    $("#sheet-panel").hidden = v !== "sheet";
+    $("#end-panel").hidden = v !== "end";
+    if (v === "frame") renderFrame(animate);
+    if (v === "sheet") renderSheet();
+    if (v === "end") renderEnd();
+    renderBar();
+  }
+
+  /* ---------- actions ---------- */
+
+  function syncScrollMargin() {
+    $("#book").style.scrollMarginTop = ($("#bar").offsetHeight + 12) + "px";
+  }
+  function toBook() {
+    syncScrollMargin();
+    const top = $("#book").getBoundingClientRect().top;
+    if (top < $("#bar").offsetHeight || top > innerHeight * .6) {
+      $("#book").scrollIntoView({ block: "start", behavior: reduced() ? "auto" : "smooth" });
+    }
+  }
+  function go(n) {
+    if (n === "end" || n > N) { st.view = "end"; st.started = true; save(); render(); toBook(); return; }
+    st.cur = Math.max(1, Math.min(N, n));
+    st.view = "frame";
+    st.started = true;
+    save();
+    render(true);
+    toBook();
+  }
+
+  $("#start").addEventListener("click", () => go(st.view === "end" ? "end" : st.cur));
+  $("#prev").addEventListener("click", () => go(st.cur - 1));
+  $("#next").addEventListener("click", () => go(st.cur + 1));
+  $("#back-roll").addEventListener("click", () => { st.view = "sheet"; save(); render(); toBook(); });
+
+  $("#tab-frame").addEventListener("click", () => { st.view = "frame"; save(); render(true); });
+  $("#tab-sheet").addEventListener("click", () => { st.view = "sheet"; save(); render(); });
+  $(".tabs").addEventListener("keydown", e => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    e.preventDefault();
+    const to = st.view === "sheet" ? "frame" : "sheet";
+    st.view = to; save(); render(to === "frame");
+    $(to === "frame" ? "#tab-frame" : "#tab-sheet").focus();
+  });
+
+  $("#contact").addEventListener("click", e => {
+    const b = e.target.closest(".ct-btn");
+    if (!b) return;
+    go(b.dataset.n === "end" ? "end" : Number(b.dataset.n));
+  });
+
+  $("#f-shot").addEventListener("click", () => {
+    const n = st.cur, s = edit(n);
+    s.shot = !s.shot;
+    save();
+    render();
+    if (s.shot) {
+      const st$ = $("#f-stamp");
+      if (!reduced()) { st$.classList.remove("slam"); void st$.offsetWidth; st$.classList.add("slam"); }
+      try { navigator.vibrate && navigator.vibrate(18); } catch {}
+      if (n < N) toast(`Frame ${pad(n)} exposed. Wind on.`, "Next frame", () => go(n + 1));
+      else toast("Last frame exposed. That's the roll.", "Finish", () => go("end"));
+    }
+  });
+
+  function dealSpare() {
+    const s = edit(st.cur);
+    const used = new Set(Object.entries(st.frames).filter(([k]) => Number(k) !== st.cur).map(([, f]) => f.spare).filter(v => v != null));
+    const start = s.spare == null ? (st.cur * 5) % SPARES.length : s.spare + 1;
+    let pick = null;
+    for (let i = 0; i < SPARES.length && pick == null; i++) {
+      const k = (start + i) % SPARES.length;
+      if (!used.has(k) && k !== s.spare) pick = k;
+    }
+    if (pick == null) pick = start % SPARES.length;
+    s.spare = pick;
+    save();
+    render();
+  }
+  $("#f-spare-btn").addEventListener("click", dealSpare);
+  $("#spare-next").addEventListener("click", dealSpare);
+  $("#spare-drop").addEventListener("click", () => { edit(st.cur).spare = null; save(); render(); });
+
+  $("#f-note").addEventListener("input", e => { edit(st.cur).note = e.target.value.slice(0, 300); save(); });
+
+  const today = new Date();
+  const dateStr = `${pad(today.getDate())} · ${pad(today.getMonth() + 1)} · ${today.getFullYear()}`;
+  $("#env-date").textContent = dateStr;
+  $("#end-date").textContent = dateStr;
+
+  function notesText() {
+    const lines = [`Night Roll · ${dateStr}`, ""];
+    FRAMES.forEach((f, i) => {
+      const s = fr(i + 1);
+      const title = s.spare != null ? `${SPARES[s.spare][0]} (spare for ${f.t})` : f.t;
+      lines.push(`${pad(i + 1)}  ${title}${s.shot ? "" : "  [not shot]"}${s.note.trim() ? "\n    " + s.note.trim() : ""}`);
+    });
+    return lines.join("\n");
+  }
+  $("#copy").addEventListener("click", () => {
+    const text = notesText();
+    const fallback = () => {
+      const box = $("#copy-box"), ta = $("#copy-text");
+      ta.value = text;
+      box.hidden = false;
+      ta.focus();
+      ta.select();
+      toast("Couldn't copy here. The notes are selected below.");
+    };
+    try {
+      if (!navigator.clipboard) return fallback();
+      navigator.clipboard.writeText(text).then(() => toast("Notes copied. Paste them anywhere safe."), fallback);
+    } catch { fallback(); }
+  });
+
+  let armTimer = null;
+  $("#reset").addEventListener("click", e => {
+    const b = e.currentTarget;
+    if (b.dataset.armed !== "true") {
+      b.dataset.armed = "true";
+      b.textContent = "Tap again to erase every tick and note";
+      clearTimeout(armTimer);
+      armTimer = setTimeout(() => { b.dataset.armed = "false"; b.textContent = "Start a new roll"; }, 4000);
+      return;
+    }
+    clearTimeout(armTimer);
+    b.dataset.armed = "false";
+    b.textContent = "Start a new roll";
+    st = { cur: 1, view: "frame", started: false, frames: {} };
+    $("#copy-box").hidden = true;
+    save();
+    render(true);
+    window.scrollTo({ top: 0, behavior: reduced() ? "auto" : "smooth" });
+    toast("Fresh roll loaded. 27 frames left.");
+  });
+
+  document.addEventListener("keydown", e => {
+    if (st.view !== "frame" || e.altKey || e.metaKey || e.ctrlKey) return;
+    const t = e.target;
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable || t.closest?.(".tabs"))) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); go(st.cur + 1); }
+    if (e.key === "ArrowLeft" && st.cur > 1) { e.preventDefault(); go(st.cur - 1); }
+  });
+
+  addEventListener("resize", syncScrollMargin);
+  paintLights();
+  render(false);
+  syncScrollMargin();
+
+  // Works offline once opened: the walk may not have signal.
+  if ("serviceWorker" in navigator && location.protocol === "https:") {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  }
+})();
+</script>
+</body>
+</html>
