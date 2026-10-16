@@ -78,9 +78,6 @@ button,input,textarea{font:inherit;color:inherit}
 
 /* masthead */
 .mast{position:relative;isolation:isolate;display:grid;gap:.6rem;padding-block-end:clamp(16px,3vw,26px)}
-.mast::before{content:"";position:absolute;z-index:-1;right:0;top:-4%;width:clamp(150px,36vw,320px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle,var(--pink) 0 42%,transparent 46%) 0 0/9px 9px;
-  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0 40%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 0 40%,transparent 70%)}
 .mast-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.4rem 1rem}
   font-size:clamp(3rem,15vw,7.2rem);line-height:.88;letter-spacing:-.005em;filter:url(#rough-lg)}
 .cam{flex:none;width:clamp(120px,28vw,220px);height:auto;overflow:visible;transform:rotate(-8deg);margin-top:-.6rem}
@@ -109,7 +106,17 @@ button,input,textarea{font:inherit;color:inherit}
 .rules{position:relative;background:var(--sheet);border:2px solid var(--ink);padding:clamp(22px,3vw,28px) clamp(14px,3vw,24px) clamp(14px,3vw,20px);max-width:36rem}
 .rules::before{content:"";position:absolute;top:-13px;left:50%;translate:-50% 0;width:96px;height:26px;background:var(--tape);transform:rotate(2deg);
   clip-path:polygon(3% 0,97% 0,100% 18%,96% 36%,100% 54%,96% 72%,100% 90%,97% 100%,3% 100%,0 82%,4% 64%,0 46%,4% 28%,0 10%)}
-.hero{margin:.1rem 0 0 -10px;line-height:0}
+.hero{position:relative;isolation:isolate;margin:.1rem 0 0 -10px;line-height:0}
+/* the lit brick wall from the poster, behind the fist, in riso yellow fading into the night */
+.hero::before{content:"";position:absolute;z-index:-1;left:-14%;right:-16px;top:-14%;bottom:-4%;pointer-events:none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='40'%3E%3Cpath d='M0 .75H56M0 20.75H56M.75 0V20.75M28.75 20.75V40' stroke='%23FFE631' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") 0 0/56px 40px,
+    radial-gradient(circle,color-mix(in srgb,var(--yellow) 75%,transparent) 0 1.3px,transparent 1.8px) 0 0/7px 7px,
+    radial-gradient(ellipse 55% 50% at 44% 48%,color-mix(in srgb,var(--yellow) 26%,transparent),transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 52% 50% at 42% 47%,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
+  mask-image:radial-gradient(ellipse 52% 50% at 42% 47%,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
+  opacity:.5;animation:wall-on 1.4s .2s ease-out both}
+@keyframes wall-on{0%{opacity:0}30%{opacity:.62}100%{opacity:.5}}
 .hero .fist{width:min(100%,460px);animation:raise 1s cubic-bezier(.2,.8,.2,1) both}
 @keyframes raise{from{transform:translateY(28px) rotate(3deg);opacity:.15}}
 .fist{display:block;width:min(100%,300px);height:auto;overflow:hidden;-webkit-mask-image:linear-gradient(#000 74%,transparent 98%);mask-image:linear-gradient(#000 74%,transparent 98%)}
