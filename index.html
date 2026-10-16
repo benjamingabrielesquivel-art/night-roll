@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Night Roll</title>
-<meta name="description" content="27 prompts for one night walk and one disposable camera.">
+<meta name="description" content="27 prompts and questions for one night out and one disposable camera.">
 <meta name="theme-color" content="#E3E4DE" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121116" media="(prefers-color-scheme: dark)">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -218,7 +218,9 @@ button,input,textarea{font:inherit;color:inherit}
 .step-t{margin:0;max-width:40rem;overflow-wrap:anywhere}
 .step[data-k="shoot"] .step-k{color:var(--on-acc);background:var(--acc);border:1.5px solid var(--ink);padding:.05rem .4rem}
 .step[data-k="shoot"] .step-t{font-size:clamp(1.15rem,4.2vw,1.4rem);font-weight:650;line-height:1.35}
-.step[data-k="ask"] .step-t{font-family:var(--f-type);font-size:clamp(1.05rem,3.8vw,1.2rem);line-height:1.4}
+.step[data-k="ask"]{padding:.9rem 1rem 1rem;background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--acc)}
+.step[data-k="ask"] .step-k{color:var(--ink)}
+.step[data-k="ask"] .step-t{font-family:var(--f-type);font-size:clamp(1.3rem,5vw,1.7rem);line-height:1.3;text-wrap:pretty}
 .step[data-k="ask"] .step-t::before{content:"\201C"}
 .step[data-k="ask"] .step-t::after{content:"\201D"}
 .step[data-k="first"] .step-t,.step[data-k="then"] .step-t{font-size:var(--t-lg)}
@@ -326,7 +328,7 @@ button,input,textarea{font:inherit;color:inherit}
 <div class="wrap">
   <header class="mast">
     <div class="mast-top">
-      <span class="label">Vol. 2 · One roll, one night walk</span>
+      <span class="label">Vol. 2 · One roll, one night out</span>
       <span class="label">Shot on a disposable</span>
     </div>
     <h1 class="logo"><span class="plate">Night<br>Roll</span><span class="plate plate-blue" aria-hidden="true">Night<br>Roll</span><span class="plate plate-acc" aria-hidden="true">Night<br>Roll</span></h1>
@@ -363,7 +365,7 @@ button,input,textarea{font:inherit;color:inherit}
     <p class="lede">let's take some random ass pics &lt;3</p>
   </header>
 
-  <section class="intro" aria-label="Before you start">
+  <section class="intro" aria-label="Before we start">
     <div class="envelope">
       <div class="env-head" aria-hidden="true"><span>Photo lab · order envelope</span><span>Roll No. 001</span></div>
       <h2 class="env-title">Order envelope</h2>
@@ -382,12 +384,12 @@ button,input,textarea{font:inherit;color:inherit}
     <div class="rules">
       <h2>House rules</h2>
       <ul>
-        <li>One camera, one walk through the city, 27 frames. No retakes and no peeking.</li>
-        <li>Every frame is something to find on the way. Find it together, agree, shoot.</li>
+        <li>One camera, one night, 27 frames. No retakes and no peeking.</li>
+        <li>We start at the table over drinks and end on the walk home.</li>
+        <li>Every frame is a feeling, not a shot list. We agree on what fits, shoot it, then we both answer the question.</li>
         <li>Flash on for anything within three steps. For lit signs and windows further away, flash off and hold very still.</li>
-        <li>Wind the wheel until it stops after every shot.</li>
-        <li>Skip anything, or deal a spare.</li>
-        <li>A line in each frame's note helps you match the prints later.</li>
+        <li>We wind the wheel until it stops after every shot.</li>
+        <li>We can skip anything, or deal a spare. A line in each note helps us match the prints later.</li>
       </ul>
     </div>
   </section>
@@ -440,7 +442,7 @@ button,input,textarea{font:inherit;color:inherit}
       <div class="perf" aria-hidden="true"></div>
       <label class="field" for="f-note">
         <span class="field-label">Note for the print</span>
-        <textarea class="input" id="f-note" rows="2" maxlength="300" placeholder="What happened, so you can match the print later"></textarea>
+        <textarea class="input" id="f-note" rows="2" maxlength="300" placeholder="What happened, so we can match the print later"></textarea>
       </label>
       <div class="f-acts">
         <button class="btn btn-big btn-acc" type="button" id="f-shot">Shot it</button>
@@ -466,15 +468,15 @@ button,input,textarea{font:inherit;color:inherit}
       <h2 class="ransom" id="ransom" aria-label="That's the roll"></h2>
       <div class="end-stats" id="end-stats"></div>
       <div class="end-body">
-        <p>Drop the camera at a photo lab and leave the envelope shut. When the prints come back, open them together.</p>
-        <p>Put that on the list. Log tonight on Letterboxd: title, stars, one line. Then go to sleep before five, as promised.</p>
+        <p>We drop the camera at a photo lab and keep the envelope shut. When the prints come back, we open them together.</p>
+        <p>That goes on the list. Then we sleep before five, as promised.</p>
       </div>
       <div class="f-acts">
         <button class="btn btn-acc" type="button" id="copy">Copy our notes</button>
         <button class="btn btn-sm" type="button" id="back-roll">Back to the roll</button>
       </div>
       <div class="copy-box" id="copy-box" hidden>
-        <label class="field" for="copy-text"><span class="field-label">Your notes, selected. Copy them from here.</span>
+        <label class="field" for="copy-text"><span class="field-label">Our notes, selected. Copy them from here.</span>
           <textarea class="input" id="copy-text" rows="8" readonly></textarea></label>
       </div>
       <div class="f-nav">
@@ -499,99 +501,117 @@ button,input,textarea{font:inherit;color:inherit}
 (() => {
   "use strict";
 
-  // Steps are [kind, text], shown in order. Every frame is something to find and shoot together on the walk.
+  // Each frame: a feeling to interpret with the camera, then a question to ask each other.
   const FRAMES = [
-    { t: "Opening shot", ink: "light", s: [
-      ["shoot", "The very first thing you see when you step outside. No choosing, no second thoughts."],
-      ["then", "Every film needs an opening shot. This is ours."]] },
-    { t: "Lost and found", ink: "deep", s: [
-      ["shoot", "Something someone lost that a stranger put up on a fence, a railing or a windowsill, so it could be found."]] },
-    { t: "A sign from the universe", ink: "light", s: [
-      ["shoot", "A sign, sticker or poster that answers a question one of you asked tonight."]] },
-    { t: "Main character", ink: "light", s: [
-      ["shoot", "The main character of this street: a pigeon, a cat, a very confident rat. Get close and give them their moment."],
-      ["tip", "Flash on, two steps away at most."]] },
-    { t: "Still waiting", ink: "tender", s: [
-      ["shoot", "A bike that has clearly been waiting for its person for a very long time."]] },
-    { t: "Word of the night", ink: "light", s: [
-      ["shoot", "One word written somewhere on the street that sums up tonight so far. You both have to agree on it."]] },
+    { t: "Opening credits", ink: "light", s: [
+      ["shoot", "Let's shoot something on this table that feels like the start of something."],
+      ["ask", "If tonight were a film, what genre is it so far?"]] },
+    { t: "Small happiness", ink: "tender", s: [
+      ["shoot", "Let's shoot something within reach that evokes happiness in us."],
+      ["ask", "What is the smallest thing that reliably makes a day better?"]] },
+    { t: "The hill we'd die on", ink: "light", s: [
+      ["shoot", "Let's shoot something that looks like it would hold a grudge."],
+      ["ask", "What is your pettiest opinion that you would defend in court?"]] },
+    { t: "No notes needed", ink: "light", s: [
+      ["shoot", "Let's shoot something that looks like it knows more than it's letting on."],
+      ["ask", "What could you talk about for an hour with no notes?"]] },
+    { t: "Home, somewhere else", ink: "tender", s: [
+      ["shoot", "Let's shoot something that feels like home, even though we're not there."],
+      ["ask", "What does home smell like to you?"]] },
+    { t: "A fear, scaled down", ink: "deep", s: [
+      ["shoot", "Let's shoot something that would have scared us as kids."],
+      ["ask", "What scared you as a kid that doesn't now? And what took its place?"]] },
     { t: "Directed by a stranger: take one", ink: "light", s: [
-      ["shoot", "Hand the camera to a stranger. They direct a photo of one of you: the spot, the pose, the face. The director's word is final."],
-      ["tip", "Show them the button, and tell them to wait for the flash light."]] },
+      ["shoot", "We hand the camera to a stranger (a waiter counts). They direct a photo of one of us: the spot, the pose, the face. The director's word is final."],
+      ["ask", "What do you think they saw in you?"],
+      ["tip", "We show them the button and tell them to wait for the flash light."]] },
     { t: "Directed by a stranger: take two", ink: "light", s: [
-      ["shoot", "Same stranger or a new one. Now the other one of you, same rules. No complaints about the vision."]] },
+      ["shoot", "Same stranger or a new one. Now the other one of us, same rules."],
+      ["ask", "Who got the better director?"]] },
     { t: "Straight onto the list", ink: "tender", s: [
-      ["shoot", "The first thing tonight that deserves a place on the list."],
+      ["shoot", "Let's shoot something that deserves a place on our list."],
       ["ask", "Films, dishes or together?"],
       ["then", "If it's empanadas, it's already on there three times."]] },
 
-    { t: "A light left on", ink: "deep", s: [
-      ["shoot", "One lit window in a dark building. A whole life is going on in there that you will never know about."],
-      ["tip", "Flash off. Lean on something and hold your breath."]] },
-    { t: "The beautiful ugly thing", ink: "deep", s: [
-      ["shoot", "The most beautiful ugly thing on this street: a crack, a stain, a tired wall. Shoot it like it hangs in a museum."]] },
     { t: "Gone by morning", ink: "deep", s: [
-      ["shoot", "Something that won't be here tomorrow: a puddle, a chalk drawing, a crowd outside a bar, a snack someone left on a wall."]] },
-    { t: "Practical effects", ink: "light", s: [
-      ["shoot", "The creepiest thing on this walk, shot like the poster for a horror film."],
-      ["tip", "From below, one step away, flash on. Let the shadows do the work."]] },
-    { t: "A door you'll never open", ink: "deep", s: [
-      ["shoot", "A door neither of you will ever walk through."],
-      ["ask", "What's behind it? One guess each."]] },
+      ["shoot", "Let's shoot something that won't be here tomorrow."],
+      ["ask", "If you could keep one ordinary moment from your life forever, which one would it be?"]] },
+    { t: "The beautiful ugly thing", ink: "deep", s: [
+      ["shoot", "Let's shoot something ugly that we find beautiful."],
+      ["ask", "Is beauty in the thing, or in deciding to look at it?"]] },
+    { t: "Happy accident", ink: "deep", s: [
+      ["shoot", "Let's shoot something that looks like it happened by accident and turned out fine."],
+      ["ask", "Which small decision, years ago, is the reason you're here tonight?"]] },
     { t: "A lie the print will tell", ink: "light", s: [
-      ["shoot", "Stage a photo that will make no sense to anyone who finds the print. Agree on the cover story now."]] },
+      ["shoot", "Let's shoot something that isn't what it looks like."],
+      ["ask", "Every photo lies a little. Which photo of you lies the most?"]] },
+    { t: "Practical effects", ink: "light", s: [
+      ["shoot", "Let's shoot something that could be the poster for a horror film."],
+      ["ask", "Which horror film would you survive, and which one gets you in the first ten minutes?"],
+      ["tip", "From below, one step away, flash on. The shadows do the work."]] },
     { t: "Con todo, sino pa' qué", ink: "light", s: [
-      ["first", "Say yes to the next harmless thing the night offers: a detour, a free sample, a street you've never taken."],
-      ["shoot", "Photograph the yes."],
+      ["shoot", "We say yes to the next harmless thing the night offers. Then we shoot something that feels like saying yes."],
+      ["ask", "What is the best thing you ever said yes to without thinking?"],
       ["then", "Wie niet waagt, wie niet wint."]] },
-    { t: "Two of a kind", ink: "tender", s: [
-      ["shoot", "Two things side by side that clearly belong together, even if nobody planned it."]] },
-    { t: "Not where I'm from", ink: "deep", s: [
-      ["shoot", "Something on this street that wouldn't exist where either of you grew up."],
-      ["ask", "What would be there instead?"]] },
+    { t: "Not where I'm from", ink: "tender", s: [
+      ["shoot", "Let's shoot something that would make no sense where we grew up."],
+      ["ask", "What do you miss from where you grew up that you can't quite explain to people here?"]] },
+    { t: "Ten years ago", ink: "deep", s: [
+      ["shoot", "Let's shoot something our ten-years-younger selves would not believe."],
+      ["ask", "What would you from ten years ago make of tonight?"]] },
+    { t: "The weight", ink: "deep", s: [
+      ["shoot", "Let's shoot something that looks heavy."],
+      ["ask", "What follows you around that you'd like to put down, just for tonight?"]] },
 
-    { t: "The city upside down", ink: "deep", s: [
-      ["shoot", "Water at night: the river, a canal, a puddle. Photograph what it's reflecting."],
-      ["tip", "Flash off, or it only sees the water."]] },
-    { t: "Almost touching", ink: "tender", s: [
-      ["shoot", "Two things that are almost touching but not quite: two branches, two bikes, a tram and its wire."]] },
-    { t: "A bench for later", ink: "tender", s: [
-      ["shoot", "The bench you would come back to in ten years, just to see if it's still there."]] },
-    { t: "Still open", ink: "tender", s: [
-      ["shoot", "The last place still open on this street. Somebody is keeping the lights on for people like you two."]] },
+    { t: "Threshold", ink: "deep", s: [
+      ["shoot", "Let's shoot something that feels like a before and an after."],
+      ["ask", "What is a door you walked through that you can't walk back through?"]] },
+    { t: "Unromantic proof", ink: "tender", s: [
+      ["shoot", "Let's shoot something that looks like care without trying to."],
+      ["ask", "What is the least romantic way anyone has ever shown they loved you?"]] },
+    { t: "Still waiting", ink: "deep", s: [
+      ["shoot", "Let's shoot something that is waiting for someone."],
+      ["ask", "What are you quietly hoping for this year?"]] },
+    { t: "Not in the chat", ink: "tender", s: [
+      ["shoot", "Let's shoot something that feels like a secret."],
+      ["ask", "Two months and thousands of messages: what is one true thing that somehow never came up?"]] },
     { t: "A heart that isn't trying", ink: "tender", s: [
-      ["shoot", "A heart shape that happened by accident: a stain, a leaf, a cracked tile. If it's on purpose, it doesn't count."]] },
+      ["shoot", "Let's shoot something that looks like love by accident."],
+      ["ask", "What is the most underrated way to tell someone you like them?"]] },
     { t: "The quiet minute", ink: "deep", s: [
-      ["first", "Stop walking. One minute, and nobody talks."],
-      ["shoot", "When the minute is up, photograph whatever you were both looking at."]] },
-    { t: "Look up", ink: "deep", s: [
-      ["shoot", "The highest thing you can see from here: a crane, a rooftop, the moon if it's out."],
-      ["tip", "Flash off. Rest the camera on something and hold your breath."]] },
-    { t: "Both of us, roughly", ink: "tender", s: [
-      ["shoot", "Turn the camera around and hold it at arm's length. No viewfinder, no countdown, one go. Both of you, roughly in frame."],
-      ["tip", "Lens facing you, flash on, thumb on the button."]] },
+      ["first", "We stop walking. One minute, and nobody talks."],
+      ["shoot", "Then we shoot what that silence looked like."],
+      ["ask", "What did you hear?"]] },
+    { t: "Aged well", ink: "tender", s: [
+      ["shoot", "Let's shoot something that has aged well."],
+      ["ask", "What do you hope you're still doing when you're eighty?"]] },
+    { t: "Both of us, roughly", ink: "light", s: [
+      ["shoot", "We turn the camera around, arm's length, no countdown, and shoot whatever tonight has done to our faces."],
+      ["ask", "Let's log tonight on Letterboxd: title, stars, one-line review."],
+      ["tip", "Lens facing us, flash on, thumb on the button."]] },
     { t: "The final frame", ink: "tender", s: [
-      ["shoot", "The last photo on this camera. Whatever you would want to see first when the prints come back."]] }
+      ["shoot", "Let's shoot the thing we'd want to see first when the prints come back."],
+      ["ask", "What is one thing from tonight you won't need a photo to remember?"]] }
   ];
 
   const SPARES = [
-    ["The reddest thing", "The reddest thing on this street, as close as the camera allows."],
-    ["Up close", "Something you would normally walk straight past, from one step away."],
-    ["Neon", "A lit sign or shop window. Flash off, and hold very still."],
-    ["Lamppost archive", "The strangest sticker on a lamppost or a pole."],
-    ["Our shoes", "Both your shoes, on the most interesting ground you've crossed tonight."],
-    ["Proof of date", "Anything with today's date on it: a receipt, a ticket, a poster."]
+    ["Lucky", "Let's shoot something that feels like luck."],
+    ["Braver than it feels", "Let's shoot something that looks braver than it feels."],
+    ["Needs a holiday", "Let's shoot something that looks like it needs a holiday."],
+    ["The best part of a song", "Let's shoot something that feels like the best part of a song."],
+    ["Patient", "Let's shoot something that has been patient for a very long time."],
+    ["Proof", "Let's shoot something that proves tonight happened."]
   ];
 
   const PARTS = [
-    { to: 9, name: "Part one", sub: "Leaving the bar" },
-    { to: 18, name: "Part two", sub: "Lost on purpose" },
+    { to: 9, name: "Part one", sub: "Drinks first" },
+    { to: 18, name: "Part two", sub: "Out the door" },
     { to: 27, name: "Part three", sub: "The long way home" }
   ];
   const INK_NAME = { light: "Light", tender: "Tender", deep: "Deep" };
-  const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask", then: "Then", tip: "Camera tip" };
+  const STEP_NAME = { first: "First", shoot: "Shoot", ask: "Ask each other", then: "Then", tip: "Camera tip" };
   const N = FRAMES.length;
-  const LS = "night-roll:v1";
+  const LS = "night-roll:v2";
   const LS_THEME = "night-roll:theme";
 
   const ICON_MOON = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg>';

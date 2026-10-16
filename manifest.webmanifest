@@ -1,7 +1,7 @@
 {
  "name": "Night Roll",
  "short_name": "Night Roll",
- "description": "27 prompts for one night walk and one disposable camera.",
+ "description": "27 prompts and questions for one night out and one disposable camera.",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
